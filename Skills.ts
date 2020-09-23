@@ -1,0 +1,27 @@
+export enum Skills {
+    AUTO = "AUTO", // chatbot automatic choose proper skill
+    VOTE = "VOTE",
+    VOTE_YES = "VOTE_YES",
+    VOTE_NO = "VOTE_NO",
+    BITE = "BITE",
+    SEE = "SEE",
+    SAVE = "SAVE",
+    FIRE = "FIRE",
+    FIRE_DIRECTLY = "FIRE_DIRECTLY",
+    KILL = "KILL",
+    CURSE = "CURSE",
+    PAIRING = "PAIRING",
+    NO_SKILL = "",
+    CHOOSE_MOTHER = "CHOOSE_MOTHER",
+    SEE_MOTHER_DIE = "SEE_MOTHER_DIE",
+    READY = "READY",
+    SKIP = "SKIP",
+    ADMIN_START_GAME = "ADMIN_START_GAME",
+    POINT = "POINT",
+    PROTECT = "PROTECT",
+    VIEW_LIFE = "VIEW_LIFE",
+    VIEW_DEAD_MAN = "VIEW_DEAD_MAN",
+    BECOME_WOLF = "BECOME_WOLF",
+    DIE_OF_LOVE="DIE_OF_LOVE",
+
+}
