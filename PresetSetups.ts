@@ -196,10 +196,3 @@ export const SETUPS: {[numberOfPlayers: number]: Array<Array<R>>} = {
     ]
 };
 
-export function getRandomSetup(numOfUsers: number): Array<R> {
-    // get list of setups for numOfUsers
-    let randomSetups = SETUPS[numOfUsers];
-    if (randomSetups === undefined) return [];
-    // choose a random one
-    return randomSetups[Random.random(0, randomSetups.length - 1)];
-}
