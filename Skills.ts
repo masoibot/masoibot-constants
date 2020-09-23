@@ -25,3 +25,27 @@ export enum Skills {
     DIE_OF_LOVE="DIE_OF_LOVE",
 
 }
+export const SKILLS: Skills[] = [
+    Skills.AUTO,
+    Skills.VOTE,
+    Skills.VOTE_YES,
+    Skills.VOTE_NO,
+    Skills.BITE,
+    Skills.SEE,
+    Skills.SAVE,
+    Skills.FIRE,
+    Skills.FIRE_DIRECTLY,
+    Skills.KILL,
+    Skills.CURSE,
+    Skills.PAIRING,
+    Skills.NO_SKILL,
+    Skills.CHOOSE_MOTHER,
+    Skills.READY,
+    Skills.SKIP,
+    Skills.ADMIN_START_GAME,
+    Skills.POINT,
+    Skills.PROTECT,
+    Skills.VIEW_LIFE,
+    Skills.VIEW_DEAD_MAN,
+    Skills.BECOME_WOLF
+];

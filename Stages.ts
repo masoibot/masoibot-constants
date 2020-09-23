@@ -107,6 +107,27 @@ export const STAGE_NAME: {[stage in Stages]: string} = {
     LAST_WORD: "Mời người bị treo cổ lên giàn!",
     VOTE_YES_NO: "Đã hết giờ thanh minh, mọi người hãy đưa ra quyết định của mình!"
 };
+export const STAGE_DESCRIPTION: {[stage in Stages]: string} = {
+    END_GAME: "Trò chơi kết thúc",
+    END_OF_DAY: "Trời tối rồi, cả làng đi ngủ",
+    WAITING_STAGE: "Đang chờ người chơi khác tham gia",
+    START_GAME: "Mọi người hãy sẵn sàng để bắt đầu chơi",
+    CUPID: "Cupid ơi dậy đi! Đêm nay cupid hãy chọn 2 người để ghép thành một đôi!",
+    WILD_CHILD: "Con hoang ơi dậy đi! Đêm nay con hoang hãy chọn một người làm mẹ!",
+    SAVER: "Bảo vệ ơi dậy đi! Đêm nay bảo vệ muốn bảo vệ ai?",
+    SEER: "Tiên tri ơi dậy đi!Đêm nay tiên tri muốn soi ai?",
+    HUNTER: "Thợ săn ơi dậy đi! Đêm nay thợ săn muốn ghim ai?",
+    WOLF: "Sói ơi dậy đi! Đêm nay sói muốn cắn ai?",
+    WOLF_PLUS: "Sói nguyền ơi dậy đi! Đêm nay người này chết, Sói nguyền có muốn nguyền không?",
+    WITCH_SAVE: "Phù thủy ơi dậy đi! Đêm nay người này chết, Phù thuỷ có muốn cứu không?",
+    WITCH_KILL: "Phù thủy ơi dậy đi! Phù thuỷ có muốn giết ai không?",
+    COUPLE: "Cặp đôi ơi dậy đi! 2 bạn có 1 phút để trò chuyện với nhau.",
+    OLD_MAN: "Già làng ơi dậy đi! Đây là số mạng còn lại của già làng.",
+    DISCUSS: "Trời sáng rồi! Mọi người hãy thức dậy thôi",
+    VOTE: "Đã hết thời gian thảo luận!",
+    LAST_WORD: "Mời người bị treo cổ lên giàn!",
+    VOTE_YES_NO: "Đã hết giờ thanh minh, mọi người hãy đưa ra quyết định của mình!"
+};
 /**
  * Các stage được gán mặc định cho người chơi
  */
