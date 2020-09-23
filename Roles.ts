@@ -14,7 +14,7 @@ export enum Roles {
     WILD_CHILD = 10
 }
 
-export const ROLE_NAMES: {[role: number]: string} = {
+export const ROLE_NAMES: { [role: number]: string } = {
     // PHE SÓI
     [Roles.WEREWOLF]: "SÓI",
     [Roles.CURSED]: "BÁN SÓI",
@@ -31,7 +31,7 @@ export const ROLE_NAMES: {[role: number]: string} = {
     [Roles.LYCAN]: "NGƯỜI HÓA SÓI",
     [Roles.ANGEL]: "THIÊN SỨ"
 };
-export const ROLE_DESCIPTIONS: {[role: number]: string} = {
+export const ROLE_DESCIPTIONS: { [role: number]: string } = {
     // PHE SÓI
     [Roles.WEREWOLF]:
         "Vào ban đêm, Ma sói sẽ tỉnh dậy cùng nhau và thống nhất giết 1 nạn nhận nào đó. Sói có thể không giết người nào và không được giết sói khác",
@@ -61,7 +61,7 @@ export const ROLE_DESCIPTIONS: {[role: number]: string} = {
     [Roles.ANGEL]:
         "Nếu bạn chết trong đêm hoặc ngày đầu tiên, bạn sẽ giành chiến thắng một mình. Nếu không, bạn là một người dân bình thường"
 };
-export const ROLE_IMAGES: {[role: number]: string} = {
+export const ROLE_IMAGES: { [role: number]: string } = {
     // PHE SÓI
     [Roles.WEREWOLF]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1889278418034541",
     [Roles.CURSED]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1889278411367875",
@@ -77,7 +77,7 @@ export const ROLE_IMAGES: {[role: number]: string} = {
     [Roles.LYCAN]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1891874781108238",
     [Roles.ANGEL]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1903763679919348‍"
 };
-export const ROLE_MAX: {[role: number]: number} = {
+export const ROLE_MAX: { [role: number]: number } = {
     // PHE SÓI
     [Roles.WEREWOLF]: 10,
     [Roles.CURSED]: 1,
@@ -109,3 +109,20 @@ export const AVAILABLE_ROLES = [
     Roles.WILD_CHILD,
     Roles.LYCAN
 ];
+
+export const ROLE_POINT = {
+    // PHE SÓI
+    [Roles.WEREWOLF]: -6,
+    [Roles.CURSED]: -3,
+    [Roles.WOLF_PLUS]: -9,
+    // PHE DÂN
+    [Roles.SEER]: +7,
+    [Roles.SAVER]: +3,
+    [Roles.HUNTER]: +3,
+    [Roles.VILLAGER]: +1,
+    [Roles.WITCH]: +4,
+    [Roles.OLD_MAN]: +2,
+    [Roles.CUPID]: -3,
+    [Roles.LYCAN]: -1,
+    [Roles.ANGEL]: 0
+}
