@@ -77,20 +77,20 @@ export const ROLE_IMAGES: {[role: number]: string} = {
     [Roles.LYCAN]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1891874781108238",
     [Roles.ANGEL]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1903763679919348‍"
 };
-export const MAX_ROLE_COUNT_IN_GAME: {[role: number]: number} = {
+export const ROLE_MAX: {[role: number]: number} = {
     // PHE SÓI
-    [Roles.WEREWOLF]: 100,
+    [Roles.WEREWOLF]: 10,
     [Roles.CURSED]: 1,
     [Roles.WOLF_PLUS]: 1,
     // PHE DÂN
     [Roles.SEER]: 1,
     [Roles.SAVER]: 1,
     [Roles.HUNTER]: 1,
-    [Roles.VILLAGER]: 100,
+    [Roles.VILLAGER]: 10,
     [Roles.WITCH]: 1,
     [Roles.OLD_MAN]: 1,
     [Roles.CUPID]: 1,
-    [Roles.LYCAN]: 100,
+    [Roles.LYCAN]: 10,
     [Roles.ANGEL]: 1
 };
 
