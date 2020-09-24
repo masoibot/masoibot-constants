@@ -5,9 +5,35 @@ import {Skills} from "./Skills";
 import {Client} from "colyseus";
 import {array2ArraySchema, arraySchema2Array} from "./Utils";
 import {Teams} from "./Teams";
-import {WereWolfLog} from "../PrivateState";
 import {v4 as uuidv4} from "uuid";
+import { SESSION } from "./History";
+export class WereWolfEvent extends Schema {
+    @type("string") skill: Skills;
+    @type("string") from: string = "";
+    @type(["string"]) targets: ArraySchema<string> = new ArraySchema<string>();
+    @type("boolean") success: boolean;
 
+    constructor(skill: Skills, from: string, targets: string[], sussess: boolean) {
+        super();
+        this.skill = skill;
+        this.from = from;
+        this.targets = array2ArraySchema<string>(targets);
+        this.success = sussess;
+    }
+}
+
+export class WereWolfLog extends Schema {
+    @type("int8") session: SESSION;
+    @type("int8") dayNo: number;
+    @type([WereWolfEvent]) events: ArraySchema<WereWolfEvent> = new ArraySchema<WereWolfEvent>();
+
+    constructor(session: SESSION, dayNo: number) {
+        super();
+        this.session = session;
+        this.dayNo = dayNo;
+        this.events = new ArraySchema<WereWolfEvent>();
+    }
+}
 export interface JoinOptions {
     playerId: string;
     playerName: string;
@@ -25,31 +51,31 @@ export interface Auth {
     uid: string;
 }
 
-export class RoleData extends Schema implements IIRoleData {
+export class RoleData extends Schema implements IRoleData {
     @type("boolean") skillWorking: boolean = true;
-    @type("string") lover: string = null;
+    @type("string") lover: string = "";
 
     @type("boolean") canCursed: boolean = true; // wolf+ only
-    @type("string") lastTarget: string = null; // for both seer/saver or hunter
+    @type("string") lastTarget: string = ""; // for both seer/saver or hunter
     @type("boolean") lastResult: boolean = false; // seer only
     @type("boolean") canSave: boolean = true; // witch only
     @type("boolean") canKill: boolean = true; // witch only
-    @type("string") mother: string = null; // wild child only
+    @type("string") mother: string = ""; // wild child only
     @type("uint8") lifeCount: number = 2; // old man only
 
-    set<T extends IIRoleData = IIRoleData>(initValues: Partial<T>) {
+    set<T extends IRoleData = IRoleData>(initValues: Partial<T>) {
         this.skillWorking = initValues.skillWorking ?? true;
-        this.lover = initValues.lover ?? null;
+        this.lover = initValues.lover ?? "";
         this.canCursed = initValues.canCursed ?? true;
-        this.lastTarget = initValues.lastTarget ?? null;
+        this.lastTarget = initValues.lastTarget ?? "";
         this.lastResult = initValues.lastResult ?? false;
         this.canSave = initValues.canSave ?? true;
         this.canKill = initValues.canKill ?? true;
-        this.mother = initValues.mother ?? null;
+        this.mother = initValues.mother ?? "";
         this.lifeCount = initValues.lifeCount ?? 2;
     }
 
-    get<T extends IBaseRoleData = IIRoleData>(): Pick<RoleData, Extract<keyof T, keyof IIRoleData>> {
+    get<T extends IBaseRoleData = IRoleData>(): Pick<RoleData, Extract<keyof T, keyof IRoleData>> {
         return this;
     }
 }
@@ -84,7 +110,7 @@ export class Player extends Schema {
         this.playerId = playerId;
         this.name = name;
         this.avatar = avatar;
-        this.role = undefined;
+        this.role ={} as WerewolfRole;
     }
 }
 
@@ -199,7 +225,7 @@ export interface IWolfPlusData extends IBaseRoleData {
     canCursed: boolean;
 }
 
-export type IIRoleData = IBaseRoleData &
+export type IRoleData = IBaseRoleData &
     IHunterData &
     ISeerData &
     ISaverData &

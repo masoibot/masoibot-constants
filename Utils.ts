@@ -25,7 +25,6 @@ export class Random {
         return array;
     }
 }
-
 export function array2ArraySchema<T>(source: T[]): ArraySchema<T> {
     if (source == null || !source.length) return new ArraySchema<T>();
     let result = new ArraySchema();
@@ -97,7 +96,7 @@ export function map2MapSchema<T>(source: Map<string, T>): MapSchema<T> {
 
 export function getRandomKeyFromMapSchema<T>(source: MapSchema<T>): string {
     let keyList = Object.keys(source);
-    if (keyList.length == 0) return null;
+    if (keyList.length == 0) return "";
     let randomIndex = Random.random(0, keyList.length);
     return keyList[randomIndex];
 }
