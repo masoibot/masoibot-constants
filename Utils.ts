@@ -1,6 +1,8 @@
 import {ArraySchema, MapSchema} from "@colyseus/schema";
 import {Action} from "./State";
 import {IAction} from "./Message";
+
+
 export class Random {
     static random(min: number, max: number) {
         return Math.floor(Math.random() * max) + min;
@@ -25,6 +27,7 @@ export class Random {
         return array;
     }
 }
+
 export function array2ArraySchema<T>(source: T[]): ArraySchema<T> {
     if (source == null || !source.length) return new ArraySchema<T>();
     let result = new ArraySchema();
@@ -54,7 +57,8 @@ export function mapSchemaNumber2Array(source: MapSchema<number>): number[] {
                 }
             }
         }
-    } catch {}
+    } catch {
+    }
     return result;
 }
 
@@ -78,7 +82,8 @@ export function mapSchema2Map<T>(source: MapSchema<T>): Map<string, T> {
         for (const key in source) {
             if (source.hasOwnProperty(key)) result.set(key, source[key]);
         }
-    } catch {}
+    } catch {
+    }
 
     return result;
 }
@@ -89,7 +94,8 @@ export function map2MapSchema<T>(source: Map<string, T>): MapSchema<T> {
         for (const key of source.keys()) {
             result[key] = source.get(key);
         }
-    } catch {}
+    } catch {
+    }
 
     return result;
 }
@@ -111,4 +117,16 @@ export function action2IAction(source: Action): IAction {
 
 export function iAction2Action(source: IAction): Action {
     return new Action(source.from, source.skill, array2ArraySchema<string>(source.targets));
+}
+
+export function mapSchema2Array<T>(source: MapSchema<T>): T[] {
+    let result: T[] = [];
+    try {
+        for (const sourceKey in source) {
+            result.push(source[sourceKey]);
+        }
+    } catch {
+    }
+    return result;
+
 }

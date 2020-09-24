@@ -99,18 +99,18 @@ export class Player extends Schema {
     // @filter(function (this: Player, client: Client, root:Schema) {
     //     return this.playerId == client.auth.uid ;
     // })
-    @type(WerewolfRole) role: WerewolfRole;
+    @type(WerewolfRole) role: WerewolfRole| undefined;
     @type("boolean") alive: boolean = true;
     @type("boolean") flagChange: boolean = false;
 
     constructor(seat: number, playerId: string, name: string, avatar: string) {
-        super();Schema
+        super();
         this.alive = true;
         this.seat = seat;
         this.playerId = playerId;
         this.name = name;
         this.avatar = avatar;
-        this.role ={} as WerewolfRole;
+        this.role = undefined;
     }
 }
 
