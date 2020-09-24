@@ -1,19 +1,6 @@
 import {ArraySchema, MapSchema} from "@colyseus/schema";
 import {Action} from "./State";
 import {IAction} from "./Message";
-export type extractPropType<TObj, TProp extends keyof TObj> = TObj[TProp];
-
-export function arrayNullUndefinedFilter<TValue>(value: TValue | null | undefined): value is TValue {
-    return value !== null && value !== undefined;
-}
-
-export async function wait(timeInMillis: number) {
-    return new Promise<void>((resolve) => {
-        global.setTimeout(() => {
-            resolve();
-        }, timeInMillis);
-    });
-}
 export class Random {
     static random(min: number, max: number) {
         return Math.floor(Math.random() * max) + min;
