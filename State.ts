@@ -6,7 +6,8 @@ import {Client} from "colyseus";
 import {array2ArraySchema, arraySchema2Array} from "./Utils";
 import {Teams} from "./Teams";
 import {v4 as uuidv4} from "uuid";
-import { SESSION } from "./History";
+import {SESSION} from "./History";
+
 export class WereWolfEvent extends Schema {
     @type("string") skill: Skills;
     @type("string") from: string = "";
