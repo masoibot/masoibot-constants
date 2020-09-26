@@ -14,12 +14,12 @@ export class WereWolfEvent extends Schema {
     @type(["string"]) targets: ArraySchema<string> = new ArraySchema<string>();
     @type("boolean") success: boolean;
 
-    constructor(skill: Skills, from: string, targets: string[], sussess: boolean) {
+    constructor(skill: Skills, from: string, targets: string[], success: boolean) {
         super();
         this.skill = skill;
         this.from = from;
         this.targets = array2ArraySchema<string>(targets);
-        this.success = sussess;
+        this.success = success;
     }
 }
 
