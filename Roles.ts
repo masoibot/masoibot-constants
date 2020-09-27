@@ -94,7 +94,7 @@ export const ROLE_MAX: { [role: number]: number } = {
     [Roles.ANGEL]: 1
 };
 
-export const AVAILABLE_ROLES= Object.values(Roles).slice(0, Object.values(Roles).length/2-1)
+export const AVAILABLE_ROLES = Object.values(Roles).slice(0, Object.values(Roles).length/2).map(r => r as unknown as Roles)
 
 export const ROLE_POINT = {
     // PHE SÓI
