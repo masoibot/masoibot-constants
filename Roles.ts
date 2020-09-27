@@ -31,7 +31,7 @@ export const ROLE_NAMES: { [role: number]: string } = {
     [Roles.LYCAN]: "NGƯỜI HÓA SÓI",
     [Roles.ANGEL]: "THIÊN SỨ"
 };
-export const ROLE_DESCIPTIONS: { [role: number]: string } = {
+export const ROLE_DESCIPTIONS: { [role in Roles]: string } = {
     // PHE SÓI
     [Roles.WEREWOLF]:
         "Vào ban đêm, Ma sói sẽ tỉnh dậy cùng nhau và thống nhất giết 1 nạn nhận nào đó. Sói có thể không giết người nào và không được giết sói khác",
@@ -60,6 +60,7 @@ export const ROLE_DESCIPTIONS: { [role: number]: string } = {
         "Người hóa sói thuộc Phe dân làng, nhưng nếu được chỉ định bởi Tiên tri, thì sẽ bị thông báo là Sói.",
     [Roles.ANGEL]:
         "Nếu bạn chết trong đêm hoặc ngày đầu tiên, bạn sẽ giành chiến thắng một mình. Nếu không, bạn là một người dân bình thường"
+
 };
 export const ROLE_IMAGES: { [role: number]: string } = {
     // PHE SÓI
@@ -94,7 +95,7 @@ export const ROLE_MAX: { [role: number]: number } = {
     [Roles.ANGEL]: 1
 };
 
-export const AVAILABLE_ROLES = Object.values(Roles).slice(0, Object.values(Roles).length/2).map(r => r as unknown as Roles)
+export const AVAILABLE_ROLES = Object.keys(Roles).slice(0, Object.keys(Roles).length/2).map(str=> parseInt(str) as Roles)
 
 export const ROLE_POINT = {
     // PHE SÓI
