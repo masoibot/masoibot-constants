@@ -1,20 +1,20 @@
 export enum Roles {
-    WOLF_PLUS ,
-    CURSED ,
-    WEREWOLF ,
-    SEER ,
-    SAVER ,
-    HUNTER ,
-    VILLAGER ,
-    WITCH ,
-    OLD_MAN ,
-    CUPID ,
-    LYCAN ,
-    ANGEL ,
+    WOLF_PLUS,
+    CURSED,
+    WEREWOLF,
+    SEER,
+    SAVER,
+    HUNTER,
+    VILLAGER,
+    WITCH,
+    OLD_MAN,
+    CUPID,
+    LYCAN,
+    ANGEL,
     WILD_CHILD
 }
 
-export const ROLE_NAMES: { [role: number]: string } = {
+export const ROLE_NAMES: { [role in Roles]: string } = {
     // PHE SÓI
     [Roles.WEREWOLF]: "SÓI",
     [Roles.CURSED]: "BÁN SÓI",
@@ -78,11 +78,12 @@ export const ROLE_IMAGES: { [role: number]: string } = {
     [Roles.LYCAN]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1891874781108238",
     [Roles.ANGEL]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1903763679919348‍"
 };
-export const ROLE_MAX: { [role: number]: number } = {
+export const ROLE_MAX: { [role in Roles]: number } = {
     // PHE SÓI
     [Roles.WEREWOLF]: 10,
     [Roles.CURSED]: 1,
     [Roles.WOLF_PLUS]: 1,
+    [Roles.WILD_CHILD]: 1,
     // PHE DÂN
     [Roles.SEER]: 1,
     [Roles.SAVER]: 1,
@@ -95,9 +96,10 @@ export const ROLE_MAX: { [role: number]: number } = {
     [Roles.ANGEL]: 1
 };
 
-export const AVAILABLE_ROLES = Object.keys(Roles).slice(0, Object.keys(Roles).length/2).map(str=> parseInt(str) as Roles)
+export const AVAILABLE_ROLES = Object.keys(Roles).slice(0, Object.keys(Roles).length / 2).map(str => parseInt(str) as Roles)
 
-export const ROLE_POINT = {
+export const ROLE_POINT: { [role in Roles]: number } = {
+    [Roles.WILD_CHILD]: -2,
     // PHE SÓI
     [Roles.WEREWOLF]: -6,
     [Roles.CURSED]: -3,
