@@ -1,18 +1,31 @@
 export enum Roles {
-    WOLF_PLUS,
-    CURSED,
     WEREWOLF,
+    WOLF_PLUS,
+    WILD_CHILD,
+    LYCAN,
+    VILLAGER,
+    ANGEL,
+    CURSED,
+    CUPID,
     SEER,
     SAVER,
     HUNTER,
-    VILLAGER,
     WITCH,
-    OLD_MAN,
-    CUPID,
-    LYCAN,
-    ANGEL,
-    WILD_CHILD
+    OLD_MAN
 }
+
+export enum PARTY {
+    WEREWOLF,
+    VILLAGER,
+    BETRAYER// Những kẻ phản bội
+}
+
+// map các role với phe tương ứng
+export const ROLE_PARTY: { [party in PARTY]: Roles[] } = {
+    [PARTY.VILLAGER]: [Roles.VILLAGER, Roles.OLD_MAN, Roles.WITCH, Roles.SEER, Roles.SAVER, Roles.HUNTER, Roles.CUPID, Roles.LYCAN],
+    [PARTY.BETRAYER]: [Roles.WILD_CHILD, Roles.CURSED],
+    [PARTY.WEREWOLF]: [Roles.WEREWOLF, Roles.WOLF_PLUS]
+};
 
 export const ROLE_NAMES: { [role in Roles]: string } = {
     // PHE SÓI
