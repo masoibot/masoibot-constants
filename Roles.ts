@@ -1,17 +1,17 @@
 export enum Roles {
-    WOLF_PLUS = -3,
-    CURSED = -2,
-    WEREWOLF = -1,
-    SEER = 1,
-    SAVER = 2,
-    HUNTER = 3,
-    VILLAGER = 4,
-    WITCH = 5,
-    OLD_MAN = 6,
-    CUPID = 7,
-    LYCAN = 8,
-    ANGEL = 9,
-    WILD_CHILD = 10
+    WOLF_PLUS ,
+    CURSED ,
+    WEREWOLF ,
+    SEER ,
+    SAVER ,
+    HUNTER ,
+    VILLAGER ,
+    WITCH ,
+    OLD_MAN ,
+    CUPID ,
+    LYCAN ,
+    ANGEL ,
+    WILD_CHILD
 }
 
 export const ROLE_NAMES: { [role: number]: string } = {
@@ -94,21 +94,7 @@ export const ROLE_MAX: { [role: number]: number } = {
     [Roles.ANGEL]: 1
 };
 
-export const AVAILABLE_ROLES = [
-    Roles.VILLAGER,
-    Roles.HUNTER,
-    Roles.SAVER,
-    Roles.SEER,
-    Roles.WITCH,
-    Roles.OLD_MAN,
-    Roles.CUPID,
-    Roles.CURSED,
-    Roles.WEREWOLF,
-    Roles.ANGEL,
-    Roles.WOLF_PLUS,
-    Roles.WILD_CHILD,
-    Roles.LYCAN
-];
+export const AVAILABLE_ROLES= Object.values(Roles).slice(0, Object.values(Roles).length/2-1)
 
 export const ROLE_POINT = {
     // PHE SÓI
