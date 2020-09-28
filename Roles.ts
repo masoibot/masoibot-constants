@@ -48,9 +48,9 @@ export enum Roles {
 }
 
 export enum PARTY {
-    WEREWOLF,
     VILLAGER,
-    BETRAYER// Những kẻ phản bội
+    BETRAYER,// Những kẻ phản bội
+    WEREWOLF
 }
 
 // map các role với phe tương ứng
