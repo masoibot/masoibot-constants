@@ -2,7 +2,7 @@
  * Lưu ý : giữ nguyên thứ tự enum để tránh ảnh hưởng tới việc hiển thị
  */
 export enum Roles {
-    //Phe dân
+    // Phe dân
     VILLAGER,
     LYCAN,
     ANGEL,
@@ -37,7 +37,7 @@ export enum Roles {
     ILLUMINATI,
     TANNER,
     VAMPIRE,
-    //Phe sói
+    // Phe sói
     WEREWOLF,
     WOLF_PLUS,
     FANG_FACE,
