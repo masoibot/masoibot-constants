@@ -161,7 +161,7 @@ export class Stage extends Schema {
     @filter(function (this: Stage, client: Client) {
         return (
             arraySchema2Array<string>(this.activePlayers).includes(client.auth.uid) ||
-            this.stageName == Stages.WAITING_STAGE
+            this.stageName === Stages.WAITING_STAGE
         );
     })
     @type([Message])

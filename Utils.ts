@@ -64,11 +64,11 @@ export function arrayNumber2MapSchema(source: number[]): MapSchema<number> {
     let result: MapSchema<number> = new MapSchema<number>();
     if (source == null || !source.length) return result;
 
-    for (const number of source) {
-        if (typeof result[number.toString()] != "number") {
-            result[number.toString()] = 1;
+    for (const num of source) {
+        if (typeof result[num.toString()] !== "number") {
+            result[num.toString()] = 1;
         } else {
-            result[number] += 1;
+            result[num] += 1;
         }
     }
     return result;
@@ -98,7 +98,7 @@ export function map2MapSchema<T>(source: Map<string, T>): MapSchema<T> {
 
 export function getRandomKeyFromMapSchema<T>(source: MapSchema<T>): string {
     let keyList = Object.keys(source);
-    if (keyList.length == 0) return "";
+    if (keyList.length === 0) return "";
     let randomIndex = Random.random(0, keyList.length);
     return keyList[randomIndex];
 }
