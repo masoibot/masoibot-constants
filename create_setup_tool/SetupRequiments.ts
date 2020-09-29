@@ -1,6 +1,6 @@
 import {Roles} from "../Roles";
 
-export const ROLE_REQUIRE_ROLES: { [r in Roles]: Roles[] } = {
+export const ROLE_REQUIRE_ROLES: {[r in Roles]: Roles[]} = {
     [Roles.WILD_CHILD]: [],
     [Roles.WEREWOLF]: [],
     [Roles.CURSED]: [],
@@ -44,10 +44,10 @@ export const ROLE_REQUIRE_ROLES: { [r in Roles]: Roles[] } = {
     [Roles.IDIOT]: [],
     [Roles.VIRGINIA_WOOLF]: [],
     [Roles.WOLF_CUB]: [],
-    [Roles.WOLVERINE]: [],
-}
+    [Roles.WOLVERINE]: []
+};
 
-export const ROLE_REQUIRE_MIN_PLAYER: { [r in Roles]: number } = {
+export const ROLE_REQUIRE_MIN_PLAYER: {[r in Roles]: number} = {
     [Roles.WEREWOLF]: 4,
     [Roles.VILLAGER]: 4,
     [Roles.SEER]: 4,
@@ -91,22 +91,21 @@ export const ROLE_REQUIRE_MIN_PLAYER: { [r in Roles]: number } = {
     [Roles.VIRGINIA_WOOLF]: 10,
     [Roles.WOLF_CUB]: 10,
     [Roles.WOLVERINE]: 10,
-    [Roles.ILLUMINATI]: 15,
-}
+    [Roles.ILLUMINATI]: 15
+};
 
-export const BASE_ROLE_1 = [Roles.VILLAGER]
-export const BASE_ROLE_2 = [...BASE_ROLE_1,Roles.SEER]
-export const BASE_ROLE_3 = [...BASE_ROLE_2,Roles.SAVER]
-export const BASE_ROLE_4 = [...BASE_ROLE_3,Roles.HUNTER]
-export const BASE_ROLE_5 = [...BASE_ROLE_4,Roles.CUPID]
-export const BASE_ROLE_6 = [...BASE_ROLE_5,Roles.OLD_MAN]
-export const BASE_ROLE_7 = [...BASE_ROLE_6,Roles.WITCH]
-export const BASE_ROLE_8 = [...BASE_ROLE_7,Roles.CURSED]
-export const BASE_ROLE_9 = [...BASE_ROLE_8,Roles.WILD_CHILD]
-export const BASE_ROLE_10 = [...BASE_ROLE_9,Roles.LYCAN]
+export const BASE_ROLE_1 = [Roles.VILLAGER];
+export const BASE_ROLE_2 = [...BASE_ROLE_1, Roles.SEER];
+export const BASE_ROLE_3 = [...BASE_ROLE_2, Roles.SAVER];
+export const BASE_ROLE_4 = [...BASE_ROLE_3, Roles.HUNTER];
+export const BASE_ROLE_5 = [...BASE_ROLE_4, Roles.CUPID];
+export const BASE_ROLE_6 = [...BASE_ROLE_5, Roles.OLD_MAN];
+export const BASE_ROLE_7 = [...BASE_ROLE_6, Roles.WITCH];
+export const BASE_ROLE_8 = [...BASE_ROLE_7, Roles.CURSED];
+export const BASE_ROLE_9 = [...BASE_ROLE_8, Roles.WILD_CHILD];
+export const BASE_ROLE_10 = [...BASE_ROLE_9, Roles.LYCAN];
 
-
-export const GAME_PLAYERS_REQUIRE_ROLES: { [numOfPlayer: number]: Roles[] } = {
+export const GAME_PLAYERS_REQUIRE_ROLES: {[numOfPlayer: number]: Roles[]} = {
     [4]: BASE_ROLE_1,
     [5]: BASE_ROLE_2,
     [6]: BASE_ROLE_3,
@@ -123,5 +122,5 @@ export const GAME_PLAYERS_REQUIRE_ROLES: { [numOfPlayer: number]: Roles[] } = {
     [17]: BASE_ROLE_8,
     [18]: BASE_ROLE_8,
     [19]: BASE_ROLE_9,
-    [20]: BASE_ROLE_8,
-}
+    [20]: BASE_ROLE_8
+};

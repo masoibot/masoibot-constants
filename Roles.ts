@@ -2,7 +2,7 @@
  * Lưu ý : giữ nguyên thứ tự enum để tránh ảnh hưởng tới việc hiển thị
  */
 export enum Roles {
-    //Phe dân
+    // Phe dân
     VILLAGER,
     LYCAN,
     ANGEL,
@@ -37,7 +37,7 @@ export enum Roles {
     ILLUMINATI,
     TANNER,
     VAMPIRE,
-    //Phe sói
+    // Phe sói
     WEREWOLF,
     WOLF_PLUS,
     FANG_FACE,
@@ -230,7 +230,7 @@ export const AVAILABLE_ROLES = Object.keys(Roles)
     .slice(0, Object.keys(Roles).length / 2)
     .map((str) => parseInt(str) as Roles);
 
-export const ROLE_POINT: { [role in Roles]: number } = {
+export const ROLE_POINT: {[role in Roles]: number} = {
     [Roles.WILD_CHILD]: -2,
     // PHE SÓI
     [Roles.WEREWOLF]: -6,
@@ -276,6 +276,5 @@ export const ROLE_POINT: { [role in Roles]: number } = {
     [Roles.IDIOT]: 2,
     [Roles.VIRGINIA_WOOLF]: -2,
     [Roles.WOLF_CUB]: -8,
-    [Roles.WOLVERINE]: -4,
-}
-
+    [Roles.WOLVERINE]: -4
+};
