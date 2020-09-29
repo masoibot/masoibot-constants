@@ -190,7 +190,7 @@ export const ROLE_MAX: {[role in Roles]: number} = {
     [Roles.WITCH]: 1,
     [Roles.OLD_MAN]: 1,
     [Roles.CUPID]: 1,
-    [Roles.LYCAN]: 10,
+    [Roles.LYCAN]: 4,
     [Roles.ANGEL]: 1,
     // ROLE CHUA HOAT DONG
     [Roles.ALPHA_WOLF]: 0,
@@ -230,22 +230,22 @@ export const AVAILABLE_ROLES = Object.keys(Roles)
     .slice(0, Object.keys(Roles).length / 2)
     .map((str) => parseInt(str) as Roles);
 
-export const ROLE_POINT: {[role in Roles]: number} = {
+export const ROLE_POINT: { [role in Roles]: number } = {
     [Roles.WILD_CHILD]: -2,
     // PHE SÓI
     [Roles.WEREWOLF]: -6,
-    [Roles.CURSED]: -3,
+    [Roles.CURSED]: -2,
     [Roles.WOLF_PLUS]: -9,
     // PHE DÂN
-    [Roles.SEER]: +7,
-    [Roles.SAVER]: +3,
-    [Roles.HUNTER]: +3,
-    [Roles.VILLAGER]: +1,
-    [Roles.WITCH]: +4,
-    [Roles.OLD_MAN]: +2,
-    [Roles.CUPID]: -3,
+    [Roles.SEER]: 3,
+    [Roles.SAVER]: 3,
+    [Roles.HUNTER]: 3,
+    [Roles.VILLAGER]: 1,
+    [Roles.WITCH]: 5,
+    [Roles.OLD_MAN]: 4,
+    [Roles.CUPID]: 3,
     [Roles.LYCAN]: -1,
-    [Roles.ANGEL]: 0,
+    [Roles.ANGEL]: 1,
     [Roles.ALPHA_WOLF]: -9,
     [Roles.APPRENTICE_SEER]: +4,
     [Roles.AURA_SEER]: +3,
@@ -276,5 +276,6 @@ export const ROLE_POINT: {[role in Roles]: number} = {
     [Roles.IDIOT]: 2,
     [Roles.VIRGINIA_WOOLF]: -2,
     [Roles.WOLF_CUB]: -8,
-    [Roles.WOLVERINE]: -4
-};
+    [Roles.WOLVERINE]: -4,
+}
+
