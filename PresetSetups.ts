@@ -195,4 +195,3 @@ export const SETUPS: {[numberOfPlayers: number]: Array<Array<R>>} = {
         ]
     ]
 };
-

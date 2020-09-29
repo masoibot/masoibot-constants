@@ -2,7 +2,6 @@ import {ArraySchema, MapSchema} from "@colyseus/schema";
 import {Action} from "./State";
 import {IAction} from "./Message";
 
-
 export class Random {
     static random(min: number, max: number) {
         return Math.floor(Math.random() * max) + min;
@@ -57,8 +56,7 @@ export function mapSchemaNumber2Array(source: MapSchema<number>): number[] {
                 }
             }
         }
-    } catch {
-    }
+    } catch {}
     return result;
 }
 
@@ -82,8 +80,7 @@ export function mapSchema2Map<T>(source: MapSchema<T>): Map<string, T> {
         for (const key in source) {
             if (source.hasOwnProperty(key)) result.set(key, source[key]);
         }
-    } catch {
-    }
+    } catch {}
 
     return result;
 }
@@ -94,8 +91,7 @@ export function map2MapSchema<T>(source: Map<string, T>): MapSchema<T> {
         for (const key of source.keys()) {
             result[key] = source.get(key);
         }
-    } catch {
-    }
+    } catch {}
 
     return result;
 }
@@ -125,8 +121,6 @@ export function mapSchema2Array<T>(source: MapSchema<T>): T[] {
         for (const sourceKey in source) {
             result.push(source[sourceKey]);
         }
-    } catch {
-    }
+    } catch {}
     return result;
-
 }

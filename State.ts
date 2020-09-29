@@ -100,7 +100,7 @@ export class Player extends Schema {
     // @filter(function (this: Player, client: Client, root:Schema) {
     //     return this.playerId == client.auth.uid ;
     // })
-    @type(WerewolfRole) role: WerewolfRole| undefined;
+    @type(WerewolfRole) role: WerewolfRole | undefined;
     @type("boolean") alive: boolean = true;
     @type("boolean") flagChange: boolean = false;
 
@@ -199,15 +199,13 @@ export interface IRoleDataWithLastTarget extends IBaseRoleData {
     lastTarget: string | "" | null;
 }
 
-export interface IHunterData extends IRoleDataWithLastTarget {
-}
+export interface IHunterData extends IRoleDataWithLastTarget {}
 
 export interface ISeerData extends IRoleDataWithLastTarget {
     lastResult: boolean;
 }
 
-export interface ISaverData extends IRoleDataWithLastTarget {
-}
+export interface ISaverData extends IRoleDataWithLastTarget {}
 
 export interface IWitchData extends IBaseRoleData {
     canSave: boolean;

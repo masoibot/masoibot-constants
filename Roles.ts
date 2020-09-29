@@ -48,29 +48,70 @@ export enum Roles {
     SORCERESS,
     WOLVERINE,
     WOLF_CUB,
-    ALPHA_WOLF,
-
+    ALPHA_WOLF
 }
 
 export enum PARTY {
     VILLAGER,
-    BETRAYER,// Những kẻ phản bội
+    BETRAYER, // Những kẻ phản bội
     WEREWOLF
 }
 
 // map các role với phe tương ứng
-export const ROLE_PARTY: { [party in PARTY]: Roles[] } = {
-    [PARTY.VILLAGER]: [Roles.VILLAGER, Roles.OLD_MAN, Roles.WITCH, Roles.SEER, Roles.SAVER,
-        Roles.HUNTER, Roles.CUPID, Roles.LYCAN, Roles.ANGEL, Roles.APPRENTICE_SEER, Roles.AURA_SEER, Roles.DISEASED, Roles.GHOST,
-        Roles.IDIOT, Roles.MASON, Roles.MAYOR, Roles.PACIFIST, Roles.VIRGINIA_WOOLF, Roles.PI, Roles.PRIEST,
-        Roles.PRINCE, Roles.SPELL_CASTER, Roles.TOUGH_GUY, Roles.TROUBLE_MAKER],
-    [PARTY.BETRAYER]: [Roles.WILD_CHILD, Roles.CURSED, Roles.DOPPEL_GANGER, Roles.DRUNK,
-        Roles.CULT_LEADER, Roles.HOODLUM, Roles.TANNER, Roles.VAMPIRE, Roles.ILLUMINATI],
-    [PARTY.WEREWOLF]: [Roles.WEREWOLF, Roles.WOLF_PLUS, Roles.SORCERESS, Roles.LONE_WOLF,
-        Roles.WOLF_CUB, Roles.MINION, Roles.DIRE_WOLF, Roles.ALPHA_WOLF, Roles.FRUIT_WOLF, Roles.FANG_FACE, Roles.WOLVERINE]
+export const ROLE_PARTY: {[party in PARTY]: Roles[]} = {
+    [PARTY.VILLAGER]: [
+        Roles.VILLAGER,
+        Roles.OLD_MAN,
+        Roles.WITCH,
+        Roles.SEER,
+        Roles.SAVER,
+        Roles.HUNTER,
+        Roles.CUPID,
+        Roles.LYCAN,
+        Roles.ANGEL,
+        Roles.APPRENTICE_SEER,
+        Roles.AURA_SEER,
+        Roles.DISEASED,
+        Roles.GHOST,
+        Roles.IDIOT,
+        Roles.MASON,
+        Roles.MAYOR,
+        Roles.PACIFIST,
+        Roles.VIRGINIA_WOOLF,
+        Roles.PI,
+        Roles.PRIEST,
+        Roles.PRINCE,
+        Roles.SPELL_CASTER,
+        Roles.TOUGH_GUY,
+        Roles.TROUBLE_MAKER
+    ],
+    [PARTY.BETRAYER]: [
+        Roles.WILD_CHILD,
+        Roles.CURSED,
+        Roles.DOPPEL_GANGER,
+        Roles.DRUNK,
+        Roles.CULT_LEADER,
+        Roles.HOODLUM,
+        Roles.TANNER,
+        Roles.VAMPIRE,
+        Roles.ILLUMINATI
+    ],
+    [PARTY.WEREWOLF]: [
+        Roles.WEREWOLF,
+        Roles.WOLF_PLUS,
+        Roles.SORCERESS,
+        Roles.LONE_WOLF,
+        Roles.WOLF_CUB,
+        Roles.MINION,
+        Roles.DIRE_WOLF,
+        Roles.ALPHA_WOLF,
+        Roles.FRUIT_WOLF,
+        Roles.FANG_FACE,
+        Roles.WOLVERINE
+    ]
 };
 // Dùng phía server, không xoá
-export const ROLE_NAMES: { [role in Roles]: string } = {
+export const ROLE_NAMES: {[role in Roles]: string} = {
     // PHE SÓI
     [Roles.WEREWOLF]: "SÓI",
     [Roles.CURSED]: "BÁN SÓI",
@@ -119,7 +160,7 @@ export const ROLE_NAMES: { [role in Roles]: string } = {
     [Roles.WOLVERINE]: ""
 };
 // Dùng cho chatbot của DUY
-export const ROLE_IMAGES: { [role: number]: string } = {
+export const ROLE_IMAGES: {[role: number]: string} = {
     // PHE SÓI
     [Roles.WEREWOLF]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1889278418034541",
     [Roles.CURSED]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1889278411367875",
@@ -135,7 +176,7 @@ export const ROLE_IMAGES: { [role: number]: string } = {
     [Roles.LYCAN]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1891874781108238",
     [Roles.ANGEL]: "https://www.facebook.com/masoibot/photos/pcb.1889279921367724/1903763679919348‍"
 };
-export const ROLE_MAX: { [role in Roles]: number } = {
+export const ROLE_MAX: {[role in Roles]: number} = {
     // PHE SÓI
     [Roles.WEREWOLF]: 10,
     [Roles.CURSED]: 1,
@@ -182,12 +223,14 @@ export const ROLE_MAX: { [role in Roles]: number } = {
     [Roles.IDIOT]: 0,
     [Roles.VIRGINIA_WOOLF]: 0,
     [Roles.WOLF_CUB]: 0,
-    [Roles.WOLVERINE]: 0,
+    [Roles.WOLVERINE]: 0
 };
 
-export const AVAILABLE_ROLES = Object.keys(Roles).slice(0, Object.keys(Roles).length / 2).map(str => parseInt(str) as Roles)
+export const AVAILABLE_ROLES = Object.keys(Roles)
+    .slice(0, Object.keys(Roles).length / 2)
+    .map((str) => parseInt(str) as Roles);
 
-export const ROLE_POINT: { [role in Roles]: number } = {
+export const ROLE_POINT: {[role in Roles]: number} = {
     [Roles.WILD_CHILD]: -2,
     // PHE SÓI
     [Roles.WEREWOLF]: -6,
@@ -233,5 +276,5 @@ export const ROLE_POINT: { [role in Roles]: number } = {
     [Roles.IDIOT]: 2,
     [Roles.VIRGINIA_WOOLF]: -2,
     [Roles.WOLF_CUB]: -8,
-    [Roles.WOLVERINE]: -4,
-}
+    [Roles.WOLVERINE]: -4
+};

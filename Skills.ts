@@ -22,8 +22,7 @@ export enum Skills {
     VIEW_LIFE = "VIEW_LIFE",
     VIEW_DEAD_MAN = "VIEW_DEAD_MAN",
     BECOME_WOLF = "BECOME_WOLF",
-    DIE_OF_LOVE="DIE_OF_LOVE",
-
+    DIE_OF_LOVE = "DIE_OF_LOVE"
 }
 export const SKILLS: Skills[] = [
     Skills.AUTO,
