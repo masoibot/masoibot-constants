@@ -1,9 +1,9 @@
-import {Skills} from "./Skills";
+import {SkillNames} from "./SkillNames";
 
 export interface IAction {
     from: string;
     targets: string[];
-    skill: Skills;
+    skill: SkillNames;
 }
 
 export interface IAdminAction {
