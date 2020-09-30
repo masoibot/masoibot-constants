@@ -10,14 +10,14 @@ import {SkillNames} from "./SkillNames";
 import {EventNames} from "./EventNames";
 
 export class WereWolfEvent extends Schema {
-    @type("string") skill: EventNames;
+    @type("string") eventName: EventNames;
     @type("string") from: string = "";
     @type(["string"]) targets: ArraySchema<string> = new ArraySchema<string>();
     @type("boolean") success: boolean;
 
-    constructor(skill: EventNames, from: string, targets: string[], success: boolean) {
+    constructor(eventName: EventNames, from: string, targets: string[], success: boolean) {
         super();
-        this.skill = skill;
+        this.eventName = eventName;
         this.from = from;
         this.targets = array2ArraySchema<string>(targets);
         this.success = success;
