@@ -1,20 +1,21 @@
 import {ArraySchema, filter, MapSchema, Schema, type} from "@colyseus/schema";
 import {Roles} from "./Roles";
 import {STAGE_TIMEOUT, Stages} from "./Stages";
-import {Skills} from "./Skills";
 import {Client} from "colyseus";
 import {array2ArraySchema, arraySchema2Array} from "./Utils";
 import {Teams} from "./Teams";
 import {v4 as uuidv4} from "uuid";
 import {SESSION} from "./History";
+import {SkillNames} from "./SkillNames";
+import {EventNames} from "./EventNames";
 
 export class WereWolfEvent extends Schema {
-    @type("string") skill: Skills;
+    @type("string") skill: EventNames;
     @type("string") from: string = "";
     @type(["string"]) targets: ArraySchema<string> = new ArraySchema<string>();
     @type("boolean") success: boolean;
 
-    constructor(skill: Skills, from: string, targets: string[], success: boolean) {
+    constructor(skill: EventNames, from: string, targets: string[], success: boolean) {
         super();
         this.skill = skill;
         this.from = from;
@@ -132,10 +133,10 @@ export class Message extends Schema {
 
 export class Action extends Schema {
     @type("string") from: string = "";
-    @type("string") skill: Skills = Skills.NO_SKILL;
+    @type("string") skill: SkillNames = SkillNames.POINT;
     @type(["string"]) targets: ArraySchema<string> = new ArraySchema<string>();
 
-    constructor(from: string, type: Skills, targets: string[]) {
+    constructor(from: string, type: SkillNames, targets: string[]) {
         super();
         this.from = from;
         this.skill = type;
