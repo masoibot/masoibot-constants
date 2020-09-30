@@ -1,6 +1,6 @@
 import {Stages} from "./Stages";
 import {Roles} from "./Roles";
-import {Skills} from "./Skills";
+import {SkillNames} from "./SkillNames";
 
 const stageChatEmoji: {[stage: string]: string} = {
     [Stages.WOLF]: "🐺",
@@ -16,13 +16,13 @@ export function getStageChatEmoji(stage?: Stages) {
 }
 
 const skillEmoji: {[skill: string]: string} = {
-    [Skills.VOTE_YES]: "👎",
-    [Skills.VOTE_NO]: "👍",
-    [Skills.BITE]: "🎯",
-    [Skills.VOTE]: "🎯"
+    [SkillNames.VOTE_YES]: "👎",
+    [SkillNames.VOTE_NO]: "👍",
+    [SkillNames.BITE]: "🎯",
+    [SkillNames.VOTE]: "🎯"
 };
 
-export function getSkillEmoji(skill: Skills) {
+export function getSkillEmoji(skill: SkillNames) {
     let emoji = skillEmoji[skill];
     if (emoji !== undefined) return emoji;
     return "🎯";

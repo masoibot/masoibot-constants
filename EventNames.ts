@@ -13,3 +13,26 @@ enum mEventNames {
 
 export type EventNames = SkillNames | mEventNames;
 export const EventNames = {...SkillNames, ...mEventNames};
+
+export const EVENTS: EventNames[] = [
+    EventNames.VOTE,
+    EventNames.VOTE_YES,
+    EventNames.VOTE_NO,
+    EventNames.BITE,
+    EventNames.SEE,
+    EventNames.SAVE,
+    EventNames.FIRE,
+    EventNames.FIRE_DIRECTLY,
+    EventNames.KILL,
+    EventNames.CURSE,
+    EventNames.PAIRING,
+    EventNames.CHOOSE_MOTHER,
+    EventNames.READY,
+    EventNames.SKIP,
+    EventNames.ADMIN_START_GAME,
+    EventNames.POINT,
+    EventNames.PROTECT,
+    EventNames.VIEW_LIFE,
+    EventNames.VIEW_DEAD_MAN,
+    EventNames.BECOME_WOLF
+];
