@@ -1,6 +1,6 @@
-import {AVAILABLE_ROLES, PARTY, ROLE_MAX, ROLE_NAMES, ROLE_PARTY, ROLE_POINT, Roles} from "../Roles";
+import {AVAILABLE_ROLES, PARTY, ROLE_MAX, ROLE_PARTY, ROLE_POINT, Roles} from "../Roles";
 import {GAME_PLAYERS_REQUIRE_ROLES, ROLE_REQUIRE_MIN_PLAYER, ROLE_REQUIRE_ROLES} from "./SetupRequiments";
-import {MapSchema} from "@colyseus/schema";
+
 const fs = require("fs");
 const fileName = "PreSetups_auto.ts";
 let setupCount = 0;
@@ -83,7 +83,7 @@ async function checkSetup(n: number) {
 }
 
 async function gen(i: number, n: number) {
-    if (i == n) {
+    if (i === n) {
         await checkSetup(n);
         return;
     }
@@ -112,4 +112,4 @@ export async function generatePreSetup() {
     await fs.appendFileSync(fileName, tailFile);
 }
 
-generatePreSetup();
+generatePreSetup().catch((e) => console.error(e));

@@ -1,5 +1,6 @@
 // THIS IS GENERATED FILE BY AutoGeneratePreSetup.ts
 import {Roles} from "../Roles";
+
 export interface IPreSetup {
     balancePoint: number;
     setup: Roles[];
