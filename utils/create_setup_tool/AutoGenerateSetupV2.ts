@@ -11,9 +11,9 @@ const headFile =
     'import {Roles} from "../../enums";\n' +
     "export interface IPreSetup {\n" +
     "    balancePoint: number;\n" +
-    "    setup: Roles[];\n" +
+    "    PRE_SETUPS: Roles[];\n" +
     "}\n" +
-    "export const setup: { [numOfPlayer: number]: IPreSetup[] } = {\n";
+    "export const PRE_SETUPS: { [numOfPlayer: number]: IPreSetup[] } = {\n";
 const tailFile = "};";
 const headPreSet = (num_of_player: number) => `\t[${num_of_player}]: [\n`;
 const tailPreSet = (count: number) => `\t], // ${count} setups generated\n`;

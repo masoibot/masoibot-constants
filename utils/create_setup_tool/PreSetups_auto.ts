@@ -5,7 +5,7 @@ export interface IPreSetup {
     balancePoint: number;
     setup: Roles[];
 }
-export const setup: {[numOfPlayer: number]: IPreSetup[]} = {
+export const PRE_SETUPS: {[numOfPlayer: number]: IPreSetup[]} = {
     [4]: [
         {
             balancePoint: -1,
