@@ -1,4 +1,5 @@
 import {SkillNames} from "./SkillNames";
+import {MapSchema} from "@colyseus/schema";
 
 export interface IAction {
     from: string;
@@ -17,4 +18,10 @@ export enum MessageTypes {
     ADMIN_ACTION = "ADMIN_ACTION",
     ACTION_RESULT = "ACTION_RESULT",
     ACTION_PUSH = "ACTION_PUSH"
+}
+
+export interface IZoomSetting {
+    setup: MapSchema<number>;
+    maxPlayer: number;
+    private: boolean;
 }

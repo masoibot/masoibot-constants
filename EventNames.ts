@@ -2,7 +2,7 @@ import {SkillNames} from "./SkillNames";
 
 enum mEventNames {
     BE_CURSED = "BE_CURSED",
-    BE_PARED_WITH = "BE_PARED_WITH",
+    BE_PAIRED_WITH = "BE_PAIRED_WITH",
     SEE_MOTHER_DIE = "SEE_MOTHER_DIE",
     VIEW_LIFE = "VIEW_LIFE",
     VIEW_DEAD_MAN = "VIEW_DEAD_MAN",
