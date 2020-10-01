@@ -1,0 +1,21 @@
+export enum StageNames {
+    WAITING_STAGE = "WAITING_STAGE",
+    START_GAME = "START_GAME",
+    CUPID = "CUPID" /** @const CUPID gọi cupid dậy ghép đôi */,
+    WILD_CHILD = "WILD_CHILD" /** @const WILD_CHILD gọi con hoang dậy nhận mẹ */,
+    SAVER = "SAVER" /** @const SAVER gọi bảo vệ dậy chọn người cần cứu */,
+    SEER = "SEER" /** @const SEER gọi tiên tri dậy */,
+    HUNTER = "HUNTER" /**@const HUNTER gọi thợ săn dậy chọn người chết theo nếu bị sói cắn */,
+    WOLF = "WOLF" /** @const WOLF gọi sói dậy cắn người */,
+    WOLF_PLUS = "WOLF_PLUS" /** @const WOLF_PLUS gọi sói nguyền dậy */,
+    WITCH_SAVE = "WITCH_SAVE" /** @const WITCH gọi phù thuỷ dậy */,
+    WITCH_KILL = "WITCH_KILL" /** @const WITCH gọi phù thuỷ dậy */,
+    COUPLE = "COUPLE" /**@const COUPLE cặp đôi thảo luận*/,
+    OLD_MAN = "OLD_MAN" /**@const OLD_MAN gọi già làng thông báo số mạng  */,
+    DISCUSS = "DISCUSS",
+    VOTE = "VOTE",
+    LAST_WORD = "LAST_WORD",
+    VOTE_YES_NO = "VOTE_YES_NO",
+    END_OF_DAY = "END_OF_DAY",
+    END_GAME = "END_GAME"
+}

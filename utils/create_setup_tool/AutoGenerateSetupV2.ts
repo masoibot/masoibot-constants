@@ -1,27 +1,28 @@
-import {AVAILABLE_ROLES, PARTY, ROLE_MAX, ROLE_PARTY, ROLE_POINT, Roles} from "../Roles";
 import {GAME_PLAYERS_REQUIRE_ROLES, ROLE_REQUIRE_MIN_PLAYER, ROLE_REQUIRE_ROLES} from "./SetupRequiments";
+import {ROLE_MAX, ROLE_POINT} from "../../definitions/RoleConsts";
+import {AVAILABLE_ROLES, PARTY, ROLE_PARTY, Roles} from "../../enums";
 
 const fs = require("fs");
 const fileName = "PreSetups_auto.ts";
 let setupCount = 0;
 
 const headFile =
-    "//THIS IS GENERATED FILE BY AutoGenerateSetupV2.ts \n" +
-    'import {Roles} from "../Roles";\n' +
-    "export interface IPreSetup{\n" +
-    "    balancePoint:number;\n" +
-    "    setup: Roles[]\n" +
+    "// THIS IS GENERATED FILE BY AutoGenerateSetupV2.ts\n" +
+    'import {Roles} from "../../enums";\n' +
+    "export interface IPreSetup {\n" +
+    "    balancePoint: number;\n" +
+    "    setup: Roles[];\n" +
     "}\n" +
-    "export const setup:{[numOfPlayer:number]:IPreSetup[]} = {\n";
-const tailFile = "}";
+    "export const setup: { [numOfPlayer: number]: IPreSetup[] } = {\n";
+const tailFile = "};";
 const headPreSet = (num_of_player: number) => `\t[${num_of_player}]: [\n`;
-const tailPreSet = (count: number) => `\t],//${count} setups generated\n`;
+const tailPreSet = (count: number) => `\t], // ${count} setups generated\n`;
 const headSetup = "\t\t{\n";
 const tailSetup = `\t\t},\n`;
 const balancePointLine = (balancePoint: number) => `\t\t\tbalancePoint: ${balancePoint},\n`;
 const setupLine = (setup: string) => `\t\t\tsetup: [${setup}]\n`;
 const ROLE_TEXT = Object.values(Roles).slice(0, Object.keys(Roles).length / 2);
-const roleElementStr = (role: Roles) => `Roles.${ROLE_TEXT[role]}`;
+const roleElementStr = (role: Roles) => ` Roles.${ROLE_TEXT[role]} `;
 
 async function appendSetupToFile(balancePoint: number, setup: number[]) {
     try {

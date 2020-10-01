@@ -1,6 +1,6 @@
 import {SkillNames} from "./SkillNames";
 
-enum mEventNames {
+export enum mEventNames {
     BE_CURSED = "BE_CURSED",
     BE_PAIRED_WITH = "BE_PAIRED_WITH",
     SEE_MOTHER_DIE = "SEE_MOTHER_DIE",

@@ -1,7 +1,5 @@
-import {Roles as R} from "./Roles";
+import {Roles as R} from "../enums";
 
-export const MAX_PLAYER_IN_GAME = 20;
-export const MIN_PLAYER_IN_GAME = 4;
 export const SETUPS: {[numberOfPlayers: number]: Array<Array<R>>} = {
     [4]: [[R.SEER, R.VILLAGER, R.VILLAGER, R.WEREWOLF]],
     [5]: [

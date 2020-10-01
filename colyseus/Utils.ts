@@ -1,31 +1,7 @@
 import {ArraySchema, MapSchema} from "@colyseus/schema";
-import {Action} from "./State";
-import {IAction} from "./Message";
-
-export class Random {
-    static random(min: number, max: number) {
-        return Math.floor(Math.random() * max) + min;
-    }
-
-    /**
-     * xếp 1 vị trí ngẫu nhiên vào cuối mảng, giống bubble_sort nhưng là bubble_exchange :v
-     * http://stackoverflow.com/questions/962802#962890
-     * @param array
-     */
-    static shuffleArray(array: Array<any>) {
-        let tmp,
-            current,
-            top = array.length;
-        if (top)
-            while (--top) {
-                current = Math.floor(Math.random() * (top + 1));
-                tmp = array[current];
-                array[current] = array[top];
-                array[top] = tmp;
-            }
-        return array;
-    }
-}
+import {IAction} from "./MessageTypes";
+import {Random} from "../utils/Random";
+import {Action} from "./state/Action";
 
 export function array2ArraySchema<T>(source: T[]): ArraySchema<T> {
     if (source == null || !source.length) return new ArraySchema<T>();

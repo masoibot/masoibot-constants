@@ -1,4 +1,4 @@
-import {Roles} from "../Roles";
+import {Roles} from "../../enums/Roles";
 
 export const ROLE_REQUIRE_ROLES: {[r in Roles]: Roles[]} = {
     [Roles.WILD_CHILD]: [],

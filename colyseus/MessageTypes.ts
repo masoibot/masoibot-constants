@@ -1,5 +1,5 @@
-import {SkillNames} from "./SkillNames";
 import {MapSchema} from "@colyseus/schema";
+import {SkillNames} from "../enums";
 
 export interface IAction {
     from: string;
