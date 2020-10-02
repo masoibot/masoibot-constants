@@ -1,6 +1,8 @@
 import {GAME_PLAYERS_REQUIRE_ROLES, ROLE_REQUIRE_MIN_PLAYER, ROLE_REQUIRE_ROLES} from "./SetupRequiments";
 import {ROLE_MAX, ROLE_POINT} from "../../definitions/RoleConsts";
 import {AVAILABLE_ROLES, PARTY, ROLE_PARTY, Roles} from "../../enums";
+import {MapSchema} from "@colyseus/schema";
+import {mapSchemaNumber2Array} from "../../colyseus/Utils";
 
 const fs = require("fs");
 const fileName = "PreSetups_auto.ts";
@@ -62,23 +64,32 @@ function checkRoleRequirement(n: number): boolean {
     return true;
 }
 
+export function calculateBalancePoint(setup: MapSchema<number> | Roles[]): number {
+    let balance = 0;
+    let setupArr = Array.isArray(setup) ? setup : mapSchemaNumber2Array(setup);
+    for (let i = 0; i < setupArr.length; i++) {
+        const role = setupArr[i] as Roles;
+        balance += ROLE_POINT[role];
+    }
+    return balance;
+}
+
 async function checkSetup(n: number) {
     if (!checkRoleRequirement(n)) return;
-    let balance = 0;
+    const balance = calculateBalancePoint(setupArr);
+    const allowBalance = 3;
+    if (Math.abs(balance) > allowBalance) return;
     let badCount = 0; // Tổng số người chơi theo phe sói
     let goodCount = 0; // Tổng số người chơi theo phe dân
     let twoFaceCount = 0; // Tổng số người chơi có thể đổi phe
     for (let i = 0; i < n; i++) {
         const role = setupArr[i] as Roles;
-        balance += ROLE_POINT[role];
         if (ROLE_PARTY[PARTY.VILLAGER].includes(role)) goodCount++;
         if (ROLE_PARTY[PARTY.WEREWOLF].includes(role)) badCount++;
         if (ROLE_PARTY[PARTY.BETRAYER].includes(role)) twoFaceCount++;
     }
     if (badCount >= Math.floor(n / 2) || badCount < Math.max(Math.floor(n / 5), 1)) return;
     if (n >= 8 && twoFaceCount < 1) return;
-    const allowBalance = 3;
-    if (Math.abs(balance) > allowBalance) return;
     await appendSetupToFile(balance, setupArr.slice(0, n));
     setupCount++;
 }
