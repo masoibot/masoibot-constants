@@ -4,6 +4,7 @@ import {WereWolfLog} from "./state/WereWolfLog";
 import {Player} from "./state/Player";
 import {Stage} from "./state/Stage";
 import {RoomSetting} from "./state/RoomSetting";
+
 export * from "./state/Action";
 export * from "./state/Message";
 export * from "./state/Player";
