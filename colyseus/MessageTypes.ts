@@ -7,8 +7,15 @@ export interface IAction {
     skill: SkillNames;
 }
 
+export enum AdminActionTypes {
+    UPDATE_SETTING = "UPDATE_SETTING",
+    SKIP_STAGE = "SKIP_STAGE",
+    JUMP_TO_STAGE = "JUMP_TO_STAGE",
+    RESET_TEST_GAME = "RESET_TEST_GAME"
+}
+
 export interface IAdminAction {
-    action: string;
+    type: AdminActionTypes;
     data: any;
 }
 
