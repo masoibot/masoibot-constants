@@ -49,4 +49,5 @@ export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: numb
             type: SetupErrorTypes.NOT_ENOUGH_VILLAGER,
             data: []
         } as ISetupError;
+    return true;
 }
