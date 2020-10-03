@@ -5,13 +5,16 @@ export enum RoomErrors {
 }
 
 export enum SetupErrorTypes {
-    PLAYERS_NOT_FIT = "setupNotFitToPlayers",
-    NOT_ENOUGH_WEREWOLF = "setupHaveNoWolf",
-    TOO_MUCH_WEREWOLF = "setupHaveTooMuchWolf",
-    ROLE_REQUIRE_NOT_FIT = "setupHaveRoleRequireRole"
+    PLAYERS_NOT_FIT = "PLAYERS_NOT_FIT",
+    NOT_ENOUGH_WEREWOLF = "NOT_ENOUGH_WEREWOLF",
+    TOO_MUCH_WEREWOLF = "TOO_MUCH_WEREWOLF",
+    ROLE_REQUIRE_NOT_FIT = "ROLE_REQUIRE_NOT_FIT",
+    ROLE_MAX_NOT_FIT = "ROLE_MAX_NOT_FIT",
+    NOT_ENOUGH_VILLAGER = "NOT_ENOUGH_VILLAGER",
+    ROLE_NOT_FOUND = "ROLE_NOT_FOUND"
 }
 
 export interface ISetupError {
     type: SetupErrorTypes;
-    data: string[];
+    data: any[];
 }
