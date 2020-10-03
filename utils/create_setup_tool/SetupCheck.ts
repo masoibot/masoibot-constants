@@ -34,7 +34,7 @@ export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: numb
                 data: [role, ROLE_MAX[role]]
             } as ISetupError;
     }
-    if (badCount >= goodCount - 1)
+    if (badCount > 0 && badCount >= goodCount)
         return {
             type: SetupErrorTypes.TOO_MUCH_WEREWOLF,
             data: []
