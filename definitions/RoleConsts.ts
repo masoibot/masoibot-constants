@@ -3,7 +3,7 @@ import {Roles} from "../enums";
 
 export const ROLE_MAX: {[role in Roles]: number} = {
     // PHE SÓI
-    [Roles.WEREWOLF]: 10,
+    [Roles.WEREWOLF]: 9, // Game tối đa có 20 người -> số sói < 10
     [Roles.CURSED]: 1,
     [Roles.WOLF_PLUS]: 1,
     [Roles.WILD_CHILD]: 1,
@@ -11,7 +11,7 @@ export const ROLE_MAX: {[role in Roles]: number} = {
     [Roles.SEER]: 1,
     [Roles.SAVER]: 1,
     [Roles.HUNTER]: 1,
-    [Roles.VILLAGER]: 10,
+    [Roles.VILLAGER]: 19, // Game tối đa 20 người, phải có ít nhất 1 sói
     [Roles.WITCH]: 1,
     [Roles.OLD_MAN]: 1,
     [Roles.CUPID]: 1,

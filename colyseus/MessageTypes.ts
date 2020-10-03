@@ -20,12 +20,25 @@ export interface IAdminAction {
     data: any;
 }
 
+export enum RoomNoticeTypes {
+    ADMIN_CHANGE_SETUP = "ADMIN_CHANGE_SETUP",
+    ADMIN_KICK_PLAYER = "ADMIN_KICK_PLAYER",
+    PLAYER_JOIN_ROOM = "PLAYER_JOIN_ROOM",
+    PLAYER_LEAVE_ROOM = "PLAYER_JOIN_ROOM"
+}
+
+export interface IRoomNotice {
+    type: RoomNoticeTypes;
+    data: any;
+}
+
 export enum MessageTypes {
     ACTION = "ACTION",
     CHAT = "CHAT",
     ADMIN_ACTION = "ADMIN_ACTION",
     ACTION_RESULT = "ACTION_RESULT",
-    ACTION_PUSH = "ACTION_PUSH"
+    ACTION_PUSH = "ACTION_PUSH",
+    ROOM_NOTICE = "ROOM_NOTICE"
 }
 
 export interface IZoomSetting {

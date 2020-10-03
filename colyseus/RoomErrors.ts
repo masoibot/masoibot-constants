@@ -1,0 +1,5 @@
+export enum RoomErrors {
+    WRONG_SETUP = "WRONG_SETUP",
+    ROOM_IS_FULL = "ROOM_IS_FULL",
+    WRONG_ROOM_PASSWORD = "WRONG_ROOM_PASSWORD"
+}
