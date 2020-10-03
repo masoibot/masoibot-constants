@@ -8,7 +8,7 @@ import {ROLE_MAX} from "../../definitions/RoleConsts";
 export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: number): true | ISetupError {
     let setupMap = Array.isArray(setup) ? arrayNumber2MapSchema(setup) : setup;
     let setupArr = Array.isArray(setup) ? setup : mapSchemaNumber2Array(setup);
-    let trueRoles = setupArr.filter((r) => r < AVAILABLE_ROLES.length && r > 0);
+    let trueRoles = setupArr.filter((r) => r < AVAILABLE_ROLES.length && r >= 0);
     if (trueRoles.length < setupArr.length)
         return {
             type: SetupErrorTypes.ROLE_NOT_FOUND,
