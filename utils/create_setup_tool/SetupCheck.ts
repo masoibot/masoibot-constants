@@ -51,3 +51,11 @@ export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: numb
         } as ISetupError;
     return true;
 }
+
+export function isSameSetup(setup1: MapSchema<number>, setup2: MapSchema<number>) {
+    if (Object.keys(setup1).length !== Object.keys(setup2).length) return false;
+    for (const key in setup1) {
+        if (setup1[key] !== setup2[key]) return false;
+    }
+    return true;
+}
