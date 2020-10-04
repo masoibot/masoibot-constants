@@ -5,7 +5,7 @@ import {ISetupError, SetupErrorTypes} from "../../colyseus/RoomErrors";
 import {ROLE_REQUIRE_ROLES} from "./SetupRequiments";
 import {ROLE_MAX} from "../../definitions/RoleConsts";
 
-export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: number): true | ISetupError {
+export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: number): boolean | ISetupError {
     let setupMap = Array.isArray(setup) ? arrayNumber2MapSchema(setup) : setup;
     let setupArr = Array.isArray(setup) ? setup : mapSchemaNumber2Array(setup);
     let trueRoles = setupArr.filter((r) => r < AVAILABLE_ROLES.length && r >= 0);
