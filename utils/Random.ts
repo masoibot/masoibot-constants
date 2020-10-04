@@ -1,24 +1,30 @@
 export class Random {
+    /**
+     * Create a random number in range [min,max-1]
+     * @param min
+     * @param max
+     */
     static random(min: number, max: number) {
-        return Math.floor(Math.random() * max) + min;
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 
     /**
-     * xếp 1 vị trí ngẫu nhiên vào cuối mảng, giống bubble_sort nhưng là bubble_exchange :v
+     * tráo đổi 1 vị trí ngẫu nhiên vào cuối mảng, giống bubble_sort nhưng là bubble_exchange :v
      * http://stackoverflow.com/questions/962802#962890
      * @param array
      */
     static shuffleArray(array: Array<any>) {
+        let arr = [...array];
         let tmp,
             current,
-            top = array.length;
+            top = arr.length;
         if (top)
             while (--top) {
                 current = Math.floor(Math.random() * (top + 1));
-                tmp = array[current];
-                array[current] = array[top];
-                array[top] = tmp;
+                tmp = arr[current];
+                arr[current] = arr[top];
+                arr[top] = tmp;
             }
-        return array;
+        return arr;
     }
 }

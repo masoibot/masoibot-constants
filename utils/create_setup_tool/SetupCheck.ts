@@ -39,12 +39,12 @@ export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: numb
             type: SetupErrorTypes.TOO_MUCH_WEREWOLF,
             data: []
         } as ISetupError;
-    if (badCount == 0)
+    if (badCount === 0)
         return {
             type: SetupErrorTypes.NOT_ENOUGH_WEREWOLF,
             data: []
         } as ISetupError;
-    if (goodCount == 0)
+    if (goodCount === 0)
         return {
             type: SetupErrorTypes.NOT_ENOUGH_VILLAGER,
             data: []
