@@ -100,3 +100,14 @@ export function mapSchema2Array<T>(source: MapSchema<T>): T[] {
     } catch {}
     return result;
 }
+
+export function mapSchemaAssign<T>(src: MapSchema<T>, des: MapSchema<T>) {
+    for (const desKey in des) {
+        if (src[desKey] == null) {
+            delete des[desKey]; // if src don't contains desKey, remove the key
+        }
+    }
+    for (const srcKey in src) {
+        des[srcKey] = src[srcKey];
+    }
+}
