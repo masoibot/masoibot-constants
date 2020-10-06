@@ -1,7 +1,6 @@
 import {ArraySchema, filter, Schema, type} from "@colyseus/schema";
 import {StageNames} from "../../enums";
 import {Client} from "colyseus";
-import {arraySchema2Array} from "../Utils";
 import {Action} from "./Action";
 import {Message} from "./Message";
 import {STAGE_TIMEOUT} from "../../definitions/StageTimeout";
@@ -12,18 +11,18 @@ export class Stage extends Schema {
     @type("int32") closeTime: number = 0;
     @type(["string"]) activePlayers: ArraySchema<string> = new ArraySchema();
     @filter(function (this: Stage, client: Client) {
-        return arraySchema2Array<string>(this.activePlayers).includes(client.auth.uid);
+        return this.activePlayers.includes(client.auth.uid);
     })
     @type(["string"])
     deadMans: ArraySchema<string> = new ArraySchema();
     @filter(function (this: Stage, client: Client) {
-        return arraySchema2Array<string>(this.activePlayers).includes(client.auth.uid);
+        return this.activePlayers.includes(client.auth.uid);
     })
     @type([Action])
     actions: ArraySchema<Action> = new ArraySchema();
     @filter(function (this: Stage, client: Client) {
         return (
-            arraySchema2Array<string>(this.activePlayers).includes(client.auth.uid) ||
+            this.activePlayers.includes(client.auth.uid) ||
             this.stageName === StageNames.WAITING_STAGE
         );
     })
