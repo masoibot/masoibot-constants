@@ -57,3 +57,10 @@ export const STAGE_DESCRIPTION: {[stage in StageNames]: string} = {
     LAST_WORD: "Mời người bị treo cổ lên giàn!",
     VOTE_YES_NO: "Đã hết giờ thanh minh, mọi người hãy đưa ra quyết định của mình!"
 };
+export const STAGES_SHOW_ACTION_PUSH = [
+    StageNames.WOLF,
+    StageNames.VOTE,
+    StageNames.VOTE_YES_NO,
+    StageNames.LAST_WORD,
+    StageNames.DISCUSS
+];
