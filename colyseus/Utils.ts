@@ -2,6 +2,7 @@ import {ArraySchema, MapSchema} from "@colyseus/schema";
 import {IAction} from "./MessageTypes";
 import {Random} from "../utils/Random";
 import {Action} from "./state/Action";
+import {key} from "colyseus.js/lib/sync/helpers";
 
 export function array2ArraySchema<T>(source: T[]): ArraySchema<T> {
     if (source == null || !source.length) return new ArraySchema<T>();
@@ -110,4 +111,30 @@ export function mapSchemaAssign<T>(src: MapSchema<T>, des: MapSchema<T>) {
     for (const srcKey in src) {
         des[srcKey] = src[srcKey];
     }
+}
+
+export function object2MapSchema(src: Object): MapSchema<string> {
+    let result = new MapSchema<string>();
+    let keys = Object.keys(src);
+    let values = Object.values(src);
+    for (let i = 0; i < keys.length; i++) {
+        result[keys[i]] = String(values[i]);
+    }
+    return result;
+}
+
+function string2RealType(s: string | "true" | "false") {
+    if (s === "true") return true;
+    if (s === "false") return false;
+    const num = parseInt(s);
+    if (!isNaN(num)) return num;
+    return s;
+}
+
+export function mapSchema2Object<T>(src: MapSchema<string>): T {
+    // Code from https://gist.github.com/lukehorvat/133e2293ba6ae96a35ba
+    let obj = Array.from(mapSchema2Map<string>(src)).reduce((obj, [key, value]) => {
+        return Object.assign(obj, {[key]: string2RealType(value)});
+    }, {});
+    return (obj as unknown) as T;
 }

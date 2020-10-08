@@ -1,19 +1,17 @@
-import {ArraySchema, Schema, type} from "@colyseus/schema";
+import {ArraySchema, MapSchema, Schema, type} from "@colyseus/schema";
 import {CoupleTeams, EventNames} from "../../enums";
-import {array2ArraySchema} from "../Utils";
+import {array2ArraySchema, object2MapSchema} from "../Utils";
 
 export class WereWolfEvent extends Schema {
     @type("string") eventName: EventNames;
     @type("string") from: string = "";
-    @type(["string"]) targets: ArraySchema<string> = new ArraySchema<string>();
-    @type("boolean") success: boolean;
+    @type({map: "string"}) data: MapSchema<string> = new MapSchema<string>();
 
-    constructor(eventName: EventNames, from: string, targets: string[], success: boolean) {
+    constructor(eventName: EventNames, from: string, data: EventData) {
         super();
         this.eventName = eventName;
         this.from = from;
-        this.targets = array2ArraySchema<string>(targets);
-        this.success = success;
+        this.data = object2MapSchema(data);
     }
 }
 
