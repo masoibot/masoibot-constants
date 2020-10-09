@@ -32,7 +32,7 @@ export const EventDataWithSkill: {[eventName in EventNames]: {new (): EventData}
     [EventNames.SEE_MOTHER_DIE]: EventData,
     [EventNames.SKIP]: EventData,
     [EventNames.VIEW_DEAD_MAN]: EventData,
-    [EventNames.VIEW_LIFE]: EventData,
+    [EventNames.BE_BITE]: EventData,
     [EventNames.VOTE]: EventData,
     [EventNames.VOTE_NO]: EventData,
     [EventNames.VOTE_YES]: EventData
