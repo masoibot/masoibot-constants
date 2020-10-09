@@ -1,7 +1,12 @@
 import {EventNames} from "../enums";
 
 export class EventData {
-    constructor(public targets: string[] = [], public success: boolean = true) {}
+    constructor(
+        public targets: string[] = [],
+        public success: boolean = true,
+        public dayNo: number = undefined,
+        public session: number = undefined
+    ) {}
 }
 
 export class ViewLifeData extends EventData {
