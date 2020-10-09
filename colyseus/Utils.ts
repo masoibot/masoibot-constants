@@ -118,7 +118,7 @@ export function object2MapSchema(src: Object): MapSchema<string> {
     let keys = Object.keys(src);
     let values = Object.values(src);
     for (let i = 0; i < keys.length; i++) {
-        result[keys[i]] = String(values[i]);
+        result[keys[i]] = typeof values[i] === "string" ? values[i] : JSON.stringify(values[i]);
     }
     return result;
 }
@@ -134,7 +134,13 @@ function string2RealType(s: string | "true" | "false") {
 export function mapSchema2Object<T>(src: MapSchema<string>): T {
     // Code from https://gist.github.com/lukehorvat/133e2293ba6ae96a35ba
     let obj = Array.from(mapSchema2Map<string>(src)).reduce((obj, [key, value]) => {
-        return Object.assign(obj, {[key]: string2RealType(value)});
+        let valueInRealType;
+        try {
+            valueInRealType = JSON.parse(value);
+        } catch {
+            valueInRealType = value;
+        }
+        return Object.assign(obj, {[key]: valueInRealType});
     }, {});
     return (obj as unknown) as T;
 }
