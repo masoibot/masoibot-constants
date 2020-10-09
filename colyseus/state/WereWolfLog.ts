@@ -1,6 +1,7 @@
 import {ArraySchema, MapSchema, Schema, type} from "@colyseus/schema";
 import {CoupleTeams, EventNames} from "../../enums";
-import {array2ArraySchema, object2MapSchema} from "../Utils";
+import {object2MapSchema} from "../Utils";
+import {EventData} from "../../definitions/EventData";
 
 export class WereWolfEvent extends Schema {
     @type("string") eventName: EventNames;

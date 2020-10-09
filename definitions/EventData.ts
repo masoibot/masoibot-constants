@@ -1,12 +1,13 @@
 import {EventNames} from "../enums";
 
-class EventData {
-    success: boolean;
-    targets: string[];
+export class EventData {
+    constructor(public targets: string[] = [], public success: boolean = true) {}
 }
 
-class ViewLifeData extends EventData {
-    lifeCount: number;
+export class ViewLifeData extends EventData {
+    constructor(targets: string[] = [], public lifeCount: number = 2) {
+        super(targets, true);
+    }
 }
 
 export const EventDataWithSkill: {[eventName in EventNames]: {new (): EventData}} = {
