@@ -36,10 +36,9 @@ export class WerewolfRole extends Schema {
     @type("int8") roleID: Roles = Roles.VILLAGER;
     @type([WereWolfEvent]) roleEvents: ArraySchema<WereWolfEvent> = new ArraySchema<WereWolfEvent>();
 
-    constructor(roleID: Roles, roleEvents: WereWolfEvent[]) {
+    constructor(roleID: Roles) {
         super();
         this.roleID = roleID;
-        this.roleEvents = array2ArraySchema(roleEvents);
     }
 }
 
