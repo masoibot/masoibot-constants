@@ -1,4 +1,4 @@
-import {EventNames} from "../enums";
+import {CoupleTeams, EventNames} from "../enums";
 
 export class EventData {
     constructor(
@@ -9,8 +9,8 @@ export class EventData {
     ) {}
 }
 
-export class ViewLifeData extends EventData {
-    constructor(targets: string[] = [], public lifeCount: number = 2) {
+export class CupidEventData extends EventData {
+    constructor(targets: string[], public team: CoupleTeams) {
         super(targets, true);
     }
 }
