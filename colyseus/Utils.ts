@@ -117,7 +117,13 @@ export function object2MapSchema(src: Object): MapSchema<string> {
     let keys = Object.keys(src);
     let values = Object.values(src);
     for (let i = 0; i < keys.length; i++) {
-        result[keys[i]] = typeof values[i] === "string" ? values[i] : String(values[i]);
+        if (typeof values[i] === "string"){
+            result[keys[i]] = values[i];
+        } else if (Array.isArray(values[i])){
+            result[keys[i]] = String([...values[i], ""]);
+        } else {
+            result[keys[i]] = String(values[i]);
+        }
     }
     return result;
 }
@@ -131,7 +137,7 @@ function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
     if (!isNaN(num)) return num;
     const array = s.split(",");
     if (array.length > 1){
-        return array;
+        return array.slice(0, array.length - 1);
     }
     return s;
 }
