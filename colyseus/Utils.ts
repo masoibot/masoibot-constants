@@ -2,7 +2,6 @@ import {ArraySchema, MapSchema} from "@colyseus/schema";
 import {IAction} from "./MessageTypes";
 import {Random} from "../utils/Random";
 import {Action} from "./state/Action";
-import {key} from "colyseus.js/lib/sync/helpers";
 
 export function array2ArraySchema<T>(source: T[]): ArraySchema<T> {
     if (source == null || !source.length) return new ArraySchema<T>();
@@ -118,16 +117,22 @@ export function object2MapSchema(src: Object): MapSchema<string> {
     let keys = Object.keys(src);
     let values = Object.values(src);
     for (let i = 0; i < keys.length; i++) {
-        result[keys[i]] = typeof values[i] === "string" ? values[i] : JSON.stringify(values[i]);
+        result[keys[i]] = typeof values[i] === "string" ? values[i] : String(values[i]);
     }
     return result;
 }
 
-function string2RealType(s: string | "true" | "false") {
+function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
+    if (s === "undefined") return undefined;
+    if (s === "null") return null;
     if (s === "true") return true;
     if (s === "false") return false;
     const num = parseInt(s);
     if (!isNaN(num)) return num;
+    const array = s.split(",");
+    if (array.length > 1){
+        return array;
+    }
     return s;
 }
 
@@ -136,7 +141,7 @@ export function mapSchema2Object<T>(src: MapSchema<string>): T {
     let obj = Array.from(mapSchema2Map<string>(src)).reduce((obj, [key, value]) => {
         let valueInRealType;
         try {
-            valueInRealType = JSON.parse(value);
+            valueInRealType = string2RealType(value);
         } catch {
             valueInRealType = value;
         }
