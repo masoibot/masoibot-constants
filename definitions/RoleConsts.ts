@@ -98,7 +98,7 @@ export const ROLE_POINT: {[role in Roles]: number} = {
     [Roles.WOLF_CUB]: -8,
     [Roles.WOLVERINE]: -4
 };
-export const FakeID:{[r in Roles]:string}={
+export const FakeID: {[r in Roles]: string} = {
     // PHE SÓI
     [Roles.WEREWOLF]: "werewolf",
     [Roles.CURSED]: "cursed",
@@ -145,4 +145,4 @@ export const FakeID:{[r in Roles]:string}={
     [Roles.VIRGINIA_WOOLF]: "virginiawoolf",
     [Roles.WOLF_CUB]: "wolfcub",
     [Roles.WOLVERINE]: "wolverine"
-}
+};
