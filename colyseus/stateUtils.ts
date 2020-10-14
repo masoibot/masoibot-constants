@@ -78,7 +78,7 @@ export function getDeadPlayers(state: State): MapSchema<Player> {
 
 export function getMaxVoted(state: State): string {
     const actions = state.currentStage.actions.filter((action) => action.skill !== SkillNames.SKIP);
-    let result = "";
+    let result = null;
     let countMap = new MapSchema<number>();
     for (const action of actions) {
         let target = action.targets[0];
@@ -89,7 +89,7 @@ export function getMaxVoted(state: State): string {
     for (const target in countMap) {
         if (countMap[target] === maxCount) {
             // hoà vote
-            result = "";
+            result = null;
         }
         if (countMap[target] > maxCount) {
             maxCount = countMap[target];
