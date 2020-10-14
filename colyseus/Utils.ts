@@ -32,7 +32,8 @@ export function mapSchemaNumber2Array(source: MapSchema<number>): number[] {
                 }
             }
         }
-    } catch {}
+    } catch {
+    }
     return result;
 }
 
@@ -56,7 +57,8 @@ export function mapSchema2Map<T>(source: MapSchema<T>): Map<string, T> {
         for (const key in source) {
             if (source.hasOwnProperty(key)) result.set(key, source[key]);
         }
-    } catch {}
+    } catch {
+    }
 
     return result;
 }
@@ -67,7 +69,8 @@ export function map2MapSchema<T>(source: Map<string, T>): MapSchema<T> {
         for (const key of source.keys()) {
             result[key] = source.get(key);
         }
-    } catch {}
+    } catch {
+    }
 
     return result;
 }
@@ -97,7 +100,8 @@ export function mapSchema2Array<T>(source: MapSchema<T>): T[] {
         for (const sourceKey in source) {
             result.push(source[sourceKey]);
         }
-    } catch {}
+    } catch {
+    }
     return result;
 }
 
@@ -113,22 +117,31 @@ export function mapSchemaAssign<T>(src: MapSchema<T>, des: MapSchema<T>) {
 }
 
 export function object2MapSchema(src: Object): MapSchema<string> {
-    let result = new MapSchema<string>();
-    let keys = Object.keys(src);
-    let values = Object.values(src);
+    const result = new MapSchema<string>();
+    const keys = Object.keys(src);
+    const values = Object.values(src);
     for (let i = 0; i < keys.length; i++) {
-        if (typeof values[i] === "string"){
-            result[keys[i]] = values[i];
-        } else if (Array.isArray(values[i])){
-            result[keys[i]] = String([...values[i], ""]);
+        const stringifyValue = String(values[i]);
+        if (values[i] !== "[object Object]" && stringifyValue === "[object Object]") {
+            throw Error("Value at key " + keys[i] + " is Object which is not supported")
+        }
+        if (Array.isArray(values[i])) {
+            if (values[i].every((item: any) => !String(item).includes(",") && !String(item).includes('\0'))) {
+                result[keys[i]] = String([...values[i], '\0']);
+            } else {
+                throw Error("Your string array at key " + keys[i] + " contains nested array or includes '\\0' or ',' which is forbidden");
+            }
+        } else if (!stringifyValue.includes(",") && !stringifyValue.includes('\0')) {
+            result[keys[i]] = stringifyValue;
         } else {
-            result[keys[i]] = String(values[i]);
+            throw Error("Value at key " + keys[i] + " includes '\\0' or ',' which is forbidden");
         }
     }
     return result;
 }
 
 function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
+    if (s === '\0') return [];
     if (s === "undefined") return undefined;
     if (s === "null") return null;
     if (s === "true") return true;
@@ -136,7 +149,7 @@ function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
     const num = parseInt(s);
     if (!isNaN(num)) return num;
     const array = s.split(",");
-    if (array.length > 1){
+    if (array.length > 1) {
         return array.slice(0, array.length - 1);
     }
     return s;
