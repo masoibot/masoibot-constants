@@ -7,7 +7,7 @@ import {State} from "./State";
 import {MapSchema} from "@colyseus/schema";
 
 export function countRoleEvent(state: State, id: string, eventName: EventNames, success?: boolean): number {
-    if (!isPlayerExist(state, id)) return 0;
+    if (!isPlayerExist(state, id) || state.players[id].role == null) return 0;
     let events = arraySchema2Array<WereWolfEvent>(state.players[id].role.roleEvents);
     return events.filter((e) => {
         const data = mapSchema2Object<EventData>(e.data);
@@ -35,11 +35,12 @@ export function getLastTargets(state: State, uid: string, skill: SkillNames, day
     if (isPlayerExist(state, uid)) {
         const player: Player = state.players[uid];
         let roleEvents = player.role?.roleEvents;
-        const events = roleEvents?.filter((e) => {
-            let data = mapSchema2Object<EventData>(e.data);
-            let dayNoCondition = dayNo ? data.dayNo === dayNo : true;
-            return dayNoCondition && e.eventName === skill;
-        })
+        const events = roleEvents
+            ?.filter((e) => {
+                let data = mapSchema2Object<EventData>(e.data);
+                let dayNoCondition = dayNo ? data.dayNo === dayNo : true;
+                return dayNoCondition && e.eventName === skill;
+            })
             .reverse();
         if (events && events.length > 0) {
             let data = mapSchema2Object<EventData>(events[0].data);
