@@ -35,11 +35,12 @@ export function getLastTargets(state: State, uid: string, skill: SkillNames, day
     if (isPlayerExist(state, uid)) {
         const player: Player = state.players[uid];
         let roleEvents = player.role?.roleEvents;
-        const events = roleEvents?.filter((e) => {
-            let data = mapSchema2Object<EventData>(e.data);
-            let dayNoCondition = dayNo ? data.dayNo === dayNo : true;
-            return dayNoCondition && e.eventName === skill;
-        })
+        const events = roleEvents
+            ?.filter((e) => {
+                let data = mapSchema2Object<EventData>(e.data);
+                let dayNoCondition = dayNo ? data.dayNo === dayNo : true;
+                return dayNoCondition && e.eventName === skill;
+            })
             .reverse();
         if (events && events.length > 0) {
             let data = mapSchema2Object<EventData>(events[0].data);
