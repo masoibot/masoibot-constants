@@ -99,12 +99,15 @@ export function getMaxVoted(state: State): string | null {
     return result;
 }
 
-export function getPlayersAsNameWithSeat(state: State, listID: string[]) {
+export function getPlayersAsNameWithSeat(state: State, listID: string[] | string) {
+    if (typeof listID === "string") listID = [listID];
     if (Array.isArray(listID)) {
         // Vẫn phải check vì không biết tại sao react vẫn nhận "target" thay vì ["target"]
         return listID.map((id) => {
             if (isPlayerExist(state, id)) {
-                return `${state.players[id].name} ${state.players[id].seat ? `(${state.players[id].seat})` : ""}`;
+                return `${state.players[id].name}${
+                    typeof state.players[id].seat === "number" ? `(${state.players[id].seat})` : ""
+                }`;
             } else return "";
         });
     } else return [];
