@@ -146,12 +146,12 @@ function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
     if (s === "null") return null;
     if (s === "true") return true;
     if (s === "false") return false;
-    const num = parseInt(s);
-    if (!isNaN(num)) return num;
     const array = s.split(",");
     if (array.length > 1) {
         return array.slice(0, array.length - 1);
     }
+    const num = parseInt(s);
+    if (!isNaN(num)) return num;
     return s;
 }
 
