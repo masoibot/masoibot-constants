@@ -117,6 +117,10 @@ export function object2MapSchema(src: Object): MapSchema<string> {
     const keys = Object.keys(src);
     const values = Object.values(src);
     for (let i = 0; i < keys.length; i++) {
+        if (typeof values[i] === "number") {
+            result[keys[i]] = values[i];
+            continue;
+        }
         const stringifyValue = String(values[i]);
         if (values[i] !== "[object Object]" && stringifyValue === "[object Object]") {
             throw Error("Value at key " + keys[i] + " is Object which is not supported");
@@ -140,19 +144,23 @@ export function object2MapSchema(src: Object): MapSchema<string> {
     return result;
 }
 
-function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
-    if (s === "\0") return [];
-    if (s === "undefined") return undefined;
-    if (s === "null") return null;
-    if (s === "true") return true;
-    if (s === "false") return false;
-    const num = parseInt(s);
-    if (!isNaN(num)) return num;
-    const array = s.split(",");
-    if (array.length > 1) {
-        return array.slice(0, array.length - 1);
+function string2RealType(s: string | "true" | "false" | "null" | "undefined" | number) {
+    if (typeof s === "number") {
+        return s;
+    } else {
+        if (s === "\0") return [];
+        if (s === "undefined") return undefined;
+        if (s === "null") return null;
+        if (s === "true") return true;
+        if (s === "false") return false;
+        const array = s.split(",");
+        if (array.length > 1) {
+            return array.slice(0, array.length - 1);
+        }
+        // const num = parseInt(s);
+        // if (!isNaN(num)) return num;
+        return s;
     }
-    return s;
 }
 
 export function mapSchema2Object<T>(src: MapSchema<string>): T {
