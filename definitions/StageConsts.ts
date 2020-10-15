@@ -1,4 +1,4 @@
-import {StageNames} from "../enums";
+import {SkillNames, StageNames} from "../enums";
 
 export * from "./StageTimeout";
 
@@ -64,3 +64,23 @@ export const STAGES_SHOW_ACTION_PUSH = [
     StageNames.WAITING_STAGE,
     StageNames.END_GAME
 ];
+export const SKILL_ALLOWED_IN_STAGE: {[stage in StageNames]: SkillNames[]} = {
+    END_GAME: [SkillNames.READY, SkillNames.SKIP],
+    WAITING_STAGE: [SkillNames.ADMIN_START_GAME],
+    START_GAME: [SkillNames.READY],
+    CUPID: [SkillNames.PAIRING, SkillNames.POINT],
+    WILD_CHILD: [SkillNames.CHOOSE_MOTHER, SkillNames.POINT],
+    SEER: [SkillNames.SEE, SkillNames.POINT],
+    SAVER: [SkillNames.PROTECT, SkillNames.POINT],
+    WOLF: [SkillNames.BITE, SkillNames.SKIP, SkillNames.POINT],
+    WOLF_PLUS: [SkillNames.CURSE],
+    WITCH_SAVE: [SkillNames.SAVE, SkillNames.SKIP],
+    WITCH_KILL: [SkillNames.KILL, SkillNames.POINT, SkillNames.SKIP],
+    HUNTER: [SkillNames.FIRE, SkillNames.FIRE_DIRECTLY, SkillNames.POINT],
+    COUPLE: [SkillNames.SKIP, SkillNames.POINT],
+    DISCUSS: [SkillNames.SKIP, SkillNames.POINT],
+    VOTE: [SkillNames.VOTE, SkillNames.SKIP, SkillNames.POINT],
+    LAST_WORD: [SkillNames.SKIP],
+    VOTE_YES_NO: [SkillNames.VOTE_YES, SkillNames.VOTE_NO],
+    END_OF_DAY: [SkillNames.SKIP]
+};
