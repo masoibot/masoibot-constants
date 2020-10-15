@@ -111,3 +111,60 @@ export function mapSchemaAssign<T>(src: MapSchema<T>, des: MapSchema<T>) {
         des[srcKey] = src[srcKey];
     }
 }
+
+export function object2MapSchema(src: Object): MapSchema<string> {
+    const result = new MapSchema<string>();
+    const keys = Object.keys(src);
+    const values = Object.values(src);
+    for (let i = 0; i < keys.length; i++) {
+        const stringifyValue = String(values[i]);
+        if (values[i] !== "[object Object]" && stringifyValue === "[object Object]") {
+            throw Error("Value at key " + keys[i] + " is Object which is not supported");
+        }
+        if (Array.isArray(values[i])) {
+            if (values[i].every((item: any) => !String(item).includes(",") && !String(item).includes("\0"))) {
+                result[keys[i]] = String([...values[i], "\0"]);
+            } else {
+                throw Error(
+                    "Your string array at key " +
+                        keys[i] +
+                        " contains nested array or includes '\\0' or ',' which is forbidden"
+                );
+            }
+        } else if (!stringifyValue.includes(",") && !stringifyValue.includes("\0")) {
+            result[keys[i]] = stringifyValue;
+        } else {
+            throw Error("Value at key " + keys[i] + " includes '\\0' or ',' which is forbidden");
+        }
+    }
+    return result;
+}
+
+function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
+    if (s === "\0") return [];
+    if (s === "undefined") return undefined;
+    if (s === "null") return null;
+    if (s === "true") return true;
+    if (s === "false") return false;
+    const num = parseInt(s);
+    if (!isNaN(num)) return num;
+    const array = s.split(",");
+    if (array.length > 1) {
+        return array.slice(0, array.length - 1);
+    }
+    return s;
+}
+
+export function mapSchema2Object<T>(src: MapSchema<string>): T {
+    // Code from https://gist.github.com/lukehorvat/133e2293ba6ae96a35ba
+    let obj = Array.from(mapSchema2Map<string>(src)).reduce((obj, [key, value]) => {
+        let valueInRealType;
+        try {
+            valueInRealType = string2RealType(value);
+        } catch {
+            valueInRealType = value;
+        }
+        return Object.assign(obj, {[key]: valueInRealType});
+    }, {});
+    return (obj as unknown) as T;
+}

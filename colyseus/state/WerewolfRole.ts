@@ -1,5 +1,6 @@
-import {Schema, type} from "@colyseus/schema";
+import {ArraySchema, Schema, type} from "@colyseus/schema";
 import {Roles} from "../../enums";
+import {WereWolfEvent} from "./WereWolfLog";
 
 export class RoleData extends Schema implements IRoleData {
     @type("boolean") skillWorking: boolean = true;
@@ -32,12 +33,11 @@ export class RoleData extends Schema implements IRoleData {
 
 export class WerewolfRole extends Schema {
     @type("int8") roleID: Roles = Roles.VILLAGER;
-    @type(RoleData) roleData: RoleData = new RoleData();
+    @type([WereWolfEvent]) roleEvents: ArraySchema<WereWolfEvent> = new ArraySchema<WereWolfEvent>();
 
-    constructor(roleID: Roles, roleData: RoleData) {
+    constructor(roleID: Roles) {
         super();
         this.roleID = roleID;
-        this.roleData = roleData;
     }
 }
 

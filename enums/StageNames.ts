@@ -11,7 +11,6 @@ export enum StageNames {
     WITCH_SAVE = "WITCH_SAVE" /** @const WITCH gọi phù thuỷ dậy */,
     WITCH_KILL = "WITCH_KILL" /** @const WITCH gọi phù thuỷ dậy */,
     COUPLE = "COUPLE" /**@const COUPLE cặp đôi thảo luận*/,
-    OLD_MAN = "OLD_MAN" /**@const OLD_MAN gọi già làng thông báo số mạng  */,
     DISCUSS = "DISCUSS",
     VOTE = "VOTE",
     LAST_WORD = "LAST_WORD",

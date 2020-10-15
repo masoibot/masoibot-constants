@@ -1,4 +1,4 @@
-import {StageNames} from "../enums";
+import {SkillNames, StageNames} from "../enums";
 
 export * from "./StageTimeout";
 
@@ -26,8 +26,7 @@ export const NEXT_STAGE: {[stage in StageNames]: StageNames} = {
     WOLF: StageNames.WOLF_PLUS,
     WOLF_PLUS: StageNames.WITCH_SAVE,
     WITCH_SAVE: StageNames.WITCH_KILL,
-    WITCH_KILL: StageNames.OLD_MAN,
-    OLD_MAN: StageNames.HUNTER,
+    WITCH_KILL: StageNames.HUNTER,
     HUNTER: StageNames.COUPLE,
     COUPLE: StageNames.DISCUSS,
     DISCUSS: StageNames.VOTE,
@@ -51,7 +50,6 @@ export const STAGE_DESCRIPTION: {[stage in StageNames]: string} = {
     WITCH_SAVE: "Phù thủy ơi dậy đi! Đêm nay người này chết, Phù thuỷ có muốn cứu không?",
     WITCH_KILL: "Phù thủy ơi dậy đi! Phù thuỷ có muốn giết ai không?",
     COUPLE: "Cặp đôi ơi dậy đi! 2 bạn có 1 phút để trò chuyện với nhau.",
-    OLD_MAN: "Già làng ơi dậy đi! Đây là số mạng còn lại của già làng.",
     DISCUSS: "Trời sáng rồi! Mọi người hãy thức dậy thôi",
     VOTE: "Đã hết thời gian thảo luận!",
     LAST_WORD: "Mời người bị treo cổ lên giàn!",
@@ -62,5 +60,27 @@ export const STAGES_SHOW_ACTION_PUSH = [
     StageNames.VOTE,
     StageNames.VOTE_YES_NO,
     StageNames.LAST_WORD,
-    StageNames.DISCUSS
+    StageNames.DISCUSS,
+    StageNames.WAITING_STAGE,
+    StageNames.END_GAME
 ];
+export const SKILL_ALLOWED_IN_STAGE: {[stage in StageNames]: SkillNames[]} = {
+    END_GAME: [SkillNames.READY, SkillNames.SKIP],
+    WAITING_STAGE: [SkillNames.ADMIN_START_GAME],
+    START_GAME: [SkillNames.READY],
+    CUPID: [SkillNames.PAIRING, SkillNames.POINT],
+    WILD_CHILD: [SkillNames.CHOOSE_MOTHER, SkillNames.POINT],
+    SEER: [SkillNames.SEE, SkillNames.POINT],
+    SAVER: [SkillNames.PROTECT, SkillNames.POINT],
+    WOLF: [SkillNames.BITE, SkillNames.SKIP, SkillNames.POINT],
+    WOLF_PLUS: [SkillNames.CURSE],
+    WITCH_SAVE: [SkillNames.SAVE, SkillNames.SKIP],
+    WITCH_KILL: [SkillNames.KILL, SkillNames.POINT, SkillNames.SKIP],
+    HUNTER: [SkillNames.FIRE, SkillNames.FIRE_DIRECTLY, SkillNames.POINT],
+    COUPLE: [SkillNames.SKIP, SkillNames.POINT],
+    DISCUSS: [SkillNames.SKIP, SkillNames.POINT],
+    VOTE: [SkillNames.VOTE, SkillNames.SKIP, SkillNames.POINT],
+    LAST_WORD: [SkillNames.SKIP],
+    VOTE_YES_NO: [SkillNames.VOTE_YES, SkillNames.VOTE_NO],
+    END_OF_DAY: [SkillNames.SKIP]
+};

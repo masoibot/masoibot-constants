@@ -59,7 +59,7 @@ export const AVAILABLE_ROLES = Object.keys(Roles)
 export const ROLE_NAMES: {[role in Roles]: string} = {
     // PHE SÓI
     [Roles.WEREWOLF]: "SÓI",
-    [Roles.CURSED]: "BÁN SÓI",
+    [Roles.CURSED]: "KẺ BỊ NGUYỀN",
     [Roles.WOLF_PLUS]: "SÓI NGUYỀN",
     [Roles.WILD_CHILD]: "CON HOANG",
     // PHE DÂN
@@ -72,8 +72,8 @@ export const ROLE_NAMES: {[role in Roles]: string} = {
     [Roles.CUPID]: "THẦN TÌNH YÊU",
     [Roles.LYCAN]: "NGƯỜI HÓA SÓI",
     [Roles.ANGEL]: "THIÊN SỨ",
-    [Roles.ALPHA_WOLF]: "",
-    [Roles.APPRENTICE_SEER]: "",
+    [Roles.ALPHA_WOLF]: "SÓI ĐẦU ĐÀN",
+    [Roles.APPRENTICE_SEER]: "TIÊN TRI TẬP SỰ",
     [Roles.AURA_SEER]: "",
     [Roles.CULT_LEADER]: "",
     [Roles.DIRE_WOLF]: "",
