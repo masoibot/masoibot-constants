@@ -98,3 +98,14 @@ export function getMaxVoted(state: State): string | null {
     }
     return result;
 }
+
+export function getPlayersAsNameWithSeat(state: State, listID: string[]) {
+    if (Array.isArray(listID)) {
+        // Vẫn phải check vì không biết tại sao react vẫn nhận "target" thay vì ["target"]
+        return listID.map((id) => {
+            if (isPlayerExist(state, id)) {
+                return `${state.players[id].name} ${state.players[id].seat ? `(${state.players[id].seat})` : ""}`;
+            } else return "";
+        });
+    } else return [];
+}
