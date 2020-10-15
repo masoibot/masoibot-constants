@@ -60,5 +60,7 @@ export const STAGES_SHOW_ACTION_PUSH = [
     StageNames.VOTE,
     StageNames.VOTE_YES_NO,
     StageNames.LAST_WORD,
-    StageNames.DISCUSS
+    StageNames.DISCUSS,
+    StageNames.WAITING_STAGE,
+    StageNames.END_GAME
 ];
