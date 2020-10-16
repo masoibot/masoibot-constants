@@ -136,7 +136,11 @@ export function object2MapSchema(src: Object): MapSchema<string> {
                 );
             }
         } else if (!stringifyValue.includes(",") && !stringifyValue.includes("\0")) {
-            result[keys[i]] = stringifyValue;
+            if (typeof values[i] === "number") {
+                result[keys[i]] = (values[i] >= 0 ? "+" : "-") + String(values[i]);
+            } else {
+                result[keys[i]] = stringifyValue;
+            }
         } else {
             throw Error("Value at key " + keys[i] + " includes '\\0' or ',' which is forbidden");
         }
@@ -144,23 +148,21 @@ export function object2MapSchema(src: Object): MapSchema<string> {
     return result;
 }
 
-function string2RealType(s: string | "true" | "false" | "null" | "undefined" | number) {
-    if (typeof s === "number") {
-        return s;
-    } else {
-        if (s === "\0") return [];
-        if (s === "undefined") return undefined;
-        if (s === "null") return null;
-        if (s === "true") return true;
-        if (s === "false") return false;
-        const array = s.split(",");
-        if (array.length > 1) {
-            return array.slice(0, array.length - 1);
-        }
-        // const num = parseInt(s);
-        // if (!isNaN(num)) return num;
-        return s;
+function string2RealType(s: string | "true" | "false" | "null" | "undefined") {
+    if (s === "\0") return [];
+    if (s === "undefined") return undefined;
+    if (s === "null") return null;
+    if (s === "true") return true;
+    if (s === "false") return false;
+    const array = s.split(",");
+    if (array.length > 1) {
+        return array.slice(0, array.length - 1);
     }
+    if (s[0] === "+" || s[0] === "-") {
+        const num = parseInt(s.slice(1));
+        if (!isNaN(num)) return num;
+    }
+    return s;
 }
 
 export function mapSchema2Object<T>(src: MapSchema<string>): T {
