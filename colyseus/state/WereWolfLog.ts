@@ -5,10 +5,10 @@ import {EventData} from "../../definitions/EventData";
 
 export class WereWolfEvent extends Schema {
     @type("string") eventName: EventNames;
-    @type("string") from: string = "";
+    @type("string") from: string | undefined = undefined;
     @type({map: "string"}) data: MapSchema<string> = new MapSchema<string>();
 
-    constructor(eventName: EventNames, from: string, data: EventData) {
+    constructor(eventName: EventNames, from: string | undefined, data: EventData) {
         super();
         this.eventName = eventName;
         this.from = from;

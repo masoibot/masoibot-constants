@@ -62,6 +62,7 @@ export const STAGES_SHOW_ACTION_PUSH = [
     StageNames.LAST_WORD,
     StageNames.DISCUSS,
     StageNames.WAITING_STAGE,
+    StageNames.START_GAME,
     StageNames.END_GAME
 ];
 export const SKILL_ALLOWED_IN_STAGE: {[stage in StageNames]: SkillNames[]} = {
