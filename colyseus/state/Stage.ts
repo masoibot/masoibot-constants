@@ -32,7 +32,7 @@ export class Stage extends Schema {
         this.openTime = Math.floor(Date.now() / 1000);
         this.closeTime = Math.floor(STAGE_TIMEOUT[this.stageName] / 1000) + this.openTime;
         this.messages = new ArraySchema<Message>();
-        // this.messages.push(new Message("bot", "Chao mung ban den voi chat!"))
+        this.actions = new ArraySchema<Action>();
         this.deadMans = new ArraySchema<string>();
         activePlayers?.forEach((id) => this.activePlayers.push(id));
     }
