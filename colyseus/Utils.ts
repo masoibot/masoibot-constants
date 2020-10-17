@@ -117,10 +117,6 @@ export function object2MapSchema(src: Object): MapSchema<string> {
     const keys = Object.keys(src);
     const values = Object.values(src);
     for (let i = 0; i < keys.length; i++) {
-        if (typeof values[i] === "number") {
-            result[keys[i]] = values[i];
-            continue;
-        }
         const stringifyValue = String(values[i]);
         if (values[i] !== "[object Object]" && stringifyValue === "[object Object]") {
             throw Error("Value at key " + keys[i] + " is Object which is not supported");

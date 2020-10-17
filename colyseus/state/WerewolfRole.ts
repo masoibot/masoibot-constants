@@ -38,6 +38,7 @@ export class WerewolfRole extends Schema {
     constructor(roleID: Roles) {
         super();
         this.roleID = roleID;
+        this.roleEvents = new ArraySchema<WereWolfEvent>();
     }
 }
 
