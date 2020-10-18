@@ -1,6 +1,6 @@
 export class Random {
     /**
-     * Create a random number in range [min,max-1]
+     * Create a random number in range [min,max-1] example : random(0,3) -> 0 or 1 or 2
      * @param min
      * @param max
      */
