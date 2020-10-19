@@ -75,7 +75,7 @@ export const SKILL_ALLOWED_IN_STAGE: {[stage in StageNames]: SkillNames[]} = {
     SEER: [SkillNames.SEE, SkillNames.POINT],
     SAVER: [SkillNames.PROTECT, SkillNames.POINT],
     WOLF: [SkillNames.BITE, SkillNames.SKIP, SkillNames.POINT],
-    WOLF_PLUS: [SkillNames.CURSE],
+    WOLF_PLUS: [SkillNames.CURSE, SkillNames.SKIP],
     WITCH_SAVE: [SkillNames.SAVE, SkillNames.SKIP],
     WITCH_KILL: [SkillNames.KILL, SkillNames.POINT, SkillNames.SKIP],
     HUNTER: [SkillNames.FIRE, SkillNames.FIRE_DIRECTLY, SkillNames.POINT],
