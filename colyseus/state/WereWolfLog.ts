@@ -1,5 +1,5 @@
 import {ArraySchema, MapSchema, Schema, type} from "@colyseus/schema";
-import {CoupleTeams, EventNames} from "../../enums";
+import {CoupleTeams, EventNames, StageNames} from "../../enums";
 import {object2MapSchema} from "../Utils";
 import {EventData} from "../../definitions/EventData";
 
@@ -20,6 +20,16 @@ export enum SESSION {
     DAY = 0,
     NIGHT
 }
+
+export const StagesInDay = [
+    StageNames.DISCUSS,
+    StageNames.VOTE_YES_NO,
+    StageNames.VOTE,
+    StageNames.LAST_WORD,
+    StageNames.END_OF_DAY,
+    StageNames.WAITING_STAGE,
+    StageNames.END_GAME
+];
 
 export class WereWolfLog extends Schema {
     @type("int8") session: SESSION;
