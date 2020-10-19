@@ -99,7 +99,7 @@ export function getMaxVoted(state: State): string | null {
     return result;
 }
 
-export function getPlayersName(state: State, listID: string[] | string, withSeat?: boolean) {
+export function getPlayersName(state: State, listID: string[] | string | undefined, withSeat?: boolean) {
     if (typeof listID === "string") listID = [listID];
     if (Array.isArray(listID)) {
         // Vẫn phải check vì không biết tại sao react vẫn nhận "target" thay vì ["target"]
