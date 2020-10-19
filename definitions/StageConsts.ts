@@ -15,6 +15,7 @@ export const DEFAULT_STAGES = [
     StageNames.END_OF_DAY,
     StageNames.END_GAME
 ];
+export const BadRoleStages = [StageNames.WOLF, StageNames.WOLF_PLUS];
 export const NEXT_STAGE: {[stage in StageNames]: StageNames} = {
     END_GAME: StageNames.WAITING_STAGE,
     WAITING_STAGE: StageNames.START_GAME,

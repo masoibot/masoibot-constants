@@ -28,7 +28,8 @@ export const StagesInDay = [
     StageNames.LAST_WORD,
     StageNames.END_OF_DAY,
     StageNames.WAITING_STAGE,
-    StageNames.END_GAME
+    StageNames.END_GAME,
+    StageNames.START_GAME
 ];
 
 export class WereWolfLog extends Schema {
