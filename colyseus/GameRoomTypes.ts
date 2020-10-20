@@ -4,15 +4,15 @@ export interface JoinOptions {
     playerPic: string;
     signature: string;
     villageId: string;
+    pass?: string;
 }
 
 export interface Metadata {
     villageId: string;
-    isPlaying: boolean;
     lock?: boolean;
-    watchers?: number;
-    playing?: boolean;
+    isPlaying: boolean;
     playersCount?: number;
+    watchers?: number;
     followings?: number;
 }
 
