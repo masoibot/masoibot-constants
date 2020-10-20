@@ -9,6 +9,11 @@ export interface JoinOptions {
 export interface Metadata {
     villageId: string;
     isPlaying: boolean;
+    lock?: boolean;
+    watchers?: number;
+    playing?: boolean;
+    playersCount?: number;
+    followings?: number;
 }
 
 export interface Auth {
