@@ -21,7 +21,9 @@ export class Stage extends Schema {
     @type([Action])
     actions: ArraySchema<Action> = new ArraySchema();
     @filter(function (this: Stage, client: Client) {
-        return client.auth && this.activePlayers.includes(client.auth.uid) || this.stageName === StageNames.WAITING_STAGE;
+        return (
+            (client.auth && this.activePlayers.includes(client.auth.uid)) || this.stageName === StageNames.WAITING_STAGE
+        );
     })
     @type([Message])
     messages: ArraySchema<Message> = new ArraySchema<Message>();
