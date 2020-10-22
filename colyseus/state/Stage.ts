@@ -11,17 +11,17 @@ export class Stage extends Schema {
     @type("int32") closeTime: number = 0;
     @type(["string"]) activePlayers: ArraySchema<string> = new ArraySchema();
     @filter(function (this: Stage, client: Client) {
-        return this.activePlayers.includes(client.auth.uid);
+        return client.auth && this.activePlayers.includes(client.auth.uid);
     })
     @type(["string"])
     deadMans: ArraySchema<string> = new ArraySchema();
     @filter(function (this: Stage, client: Client) {
-        return this.activePlayers.includes(client.auth.uid);
+        return client.auth && this.activePlayers.includes(client.auth.uid);
     })
     @type([Action])
     actions: ArraySchema<Action> = new ArraySchema();
     @filter(function (this: Stage, client: Client) {
-        return this.activePlayers.includes(client.auth.uid) || this.stageName === StageNames.WAITING_STAGE;
+        return client.auth && this.activePlayers.includes(client.auth.uid) || this.stageName === StageNames.WAITING_STAGE;
     })
     @type([Message])
     messages: ArraySchema<Message> = new ArraySchema<Message>();
