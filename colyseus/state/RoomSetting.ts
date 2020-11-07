@@ -6,4 +6,8 @@ export class RoomSetting extends Schema {
     @type("boolean") autoChangeSetup: boolean = true;
     @type("number") maxPlayer: number = 20;
     @type(["string"]) bannedUsers: ArraySchema<string> = new ArraySchema<string>();
+
+    constructor() {
+        super();
+    }
 }

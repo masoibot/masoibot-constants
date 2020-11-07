@@ -18,7 +18,7 @@ export class State extends Schema {
     @type({map: "number"}) setup: MapSchema<number> = new MapSchema();
     @type({map: Player}) players: MapSchema<Player> = new MapSchema();
     @type([Player]) spectators: ArraySchema<Player> = new ArraySchema<Player>();
-    @type(Stage) currentStage: Stage = new Stage(StageNames.WAITING_STAGE);
+    @type(Stage) currentStage: Stage = new Stage()._assign(StageNames.WAITING_STAGE);
     @type("int8") dayNo: number = 1;
     @type([WereWolfLog]) gameHistory: ArraySchema<WereWolfLog> = new ArraySchema<WereWolfLog>();
     @type("int8") winTeam: TeamNames = TeamNames.NO_TEAM;

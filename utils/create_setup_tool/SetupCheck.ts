@@ -17,7 +17,7 @@ export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: numb
     if (setupArr.length !== numOfPlayer) return {type: SetupErrorTypes.PLAYERS_NOT_FIT, data: []} as ISetupError;
     let goodCount = 0;
     let badCount = 0;
-    for (const roleKey in setupMap) {
+    setupMap.forEach((value, roleKey) => {
         const role = parseInt(roleKey) as Roles;
         for (const requireRole of ROLE_REQUIRE_ROLES[role]) {
             if (!setupArr.includes(requireRole))
@@ -26,14 +26,14 @@ export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: numb
                     data: [role, requireRole]
                 } as ISetupError;
         }
-        if (ROLE_PARTY[PARTY.VILLAGER].includes(role)) goodCount += setupMap[roleKey];
-        if (ROLE_PARTY[PARTY.WEREWOLF].includes(role)) badCount += setupMap[roleKey];
-        if (ROLE_MAX[role] < setupMap[roleKey])
+        if (ROLE_PARTY[PARTY.VILLAGER].includes(role)) goodCount += setupMap.get(roleKey);
+        if (ROLE_PARTY[PARTY.WEREWOLF].includes(role)) badCount += setupMap.get(roleKey);
+        if (ROLE_MAX[role] < setupMap.get(roleKey))
             return {
                 type: SetupErrorTypes.ROLE_MAX_NOT_FIT,
                 data: [role, ROLE_MAX[role]]
             } as ISetupError;
-    }
+    });
     if (badCount > 0 && badCount >= goodCount)
         return {
             type: SetupErrorTypes.TOO_MUCH_WEREWOLF,
@@ -53,9 +53,9 @@ export function checkSetup(setup: Roles[] | MapSchema<number>, numOfPlayer: numb
 }
 
 export function isSameSetup(setup1: MapSchema<number>, setup2: MapSchema<number>) {
-    if (Object.keys(setup1).length !== Object.keys(setup2).length) return false;
-    for (const key in setup1) {
-        if (setup1[key] !== setup2[key]) return false;
+    if ([...setup1.values()].length !== setup2.size) return false;
+    for (const key of setup1.keys()) {
+        if (setup1.get(key) !== setup2.get(key)) return false;
     }
     return true;
 }

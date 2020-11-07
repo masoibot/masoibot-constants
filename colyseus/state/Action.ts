@@ -7,10 +7,11 @@ export class Action extends Schema {
     @type("string") skill: SkillNames = SkillNames.POINT;
     @type(["string"]) targets: ArraySchema<string> = new ArraySchema<string>();
 
-    constructor(from: string, type: SkillNames, targets: string[]) {
+    constructor() {
         super();
-        this.from = from;
-        this.skill = type;
-        this.targets = array2ArraySchema<string>(targets);
+    }
+
+    _assign(from: string, skill: SkillNames, targets: string[]){
+        return (this as Action).assign({from, skill, targets: array2ArraySchema<string>(targets)})
     }
 }
