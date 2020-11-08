@@ -11,7 +11,7 @@ export class Action extends Schema {
         super();
     }
 
-    _assign(from: string, skill: SkillNames, targets: string[]){
-        return (this as Action).assign({from, skill, targets: array2ArraySchema<string>(targets)})
+    _assign(from: string, skill: SkillNames, targets: string[]) {
+        return (this as Action).assign({from, skill, targets: array2ArraySchema<string>(targets)});
     }
 }

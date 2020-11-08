@@ -12,7 +12,7 @@ export class WereWolfEvent extends Schema {
         super();
     }
 
-    _assign(eventName: EventNames, from: string | undefined, data: EventData){
+    _assign(eventName: EventNames, from: string | undefined, data: EventData) {
         return (this as WereWolfEvent).assign({eventName, from, data: object2MapSchema(data)});
     }
 }
@@ -42,7 +42,7 @@ export class WereWolfLog extends Schema {
         super();
     }
 
-    _assign(session: SESSION, dayNo: number){
+    _assign(session: SESSION, dayNo: number) {
         return (this as WereWolfLog).assign({session, dayNo});
     }
 }

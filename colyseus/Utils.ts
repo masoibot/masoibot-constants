@@ -57,9 +57,9 @@ export function mapSchema2Map<T>(source: MapSchema<T>): Map<string, T> {
     //
     let result: Map<string, T> = new Map();
     // try {
-        source.forEach((value, key) => {
-            result.set(key, value);
-        });
+    source.forEach((value, key) => {
+        result.set(key, value);
+    });
     // } catch {}
     //
     return result;
@@ -183,7 +183,7 @@ export function mapSchema2Object<T>(src: MapSchema<string>): T {
 
 export function objectMapSchema2Object<T>(src: {[key: string]: any}): T {
     const result = {...src};
-    for (const key in src){
+    for (const key in src) {
         (result as any)[key] = string2RealType(src[key]);
     }
     return result as T;

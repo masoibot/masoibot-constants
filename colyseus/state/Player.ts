@@ -17,7 +17,7 @@ export class Player extends Schema {
         super();
     }
 
-    _assign(seat: number, playerId: string, name: string, avatar: string){
+    _assign(seat: number, playerId: string, name: string, avatar: string) {
         return (this as Player).assign({seat, playerId, name, avatar});
     }
 }

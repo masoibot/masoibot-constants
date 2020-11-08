@@ -96,7 +96,7 @@ export function getMaxVoted(state: State): string | null {
             maxCount = value;
             result = target;
         }
-    })
+    });
     return result;
 }
 

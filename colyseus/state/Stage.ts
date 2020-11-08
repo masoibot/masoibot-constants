@@ -34,8 +34,8 @@ export class Stage extends Schema {
         this.closeTime = Math.floor(STAGE_TIMEOUT[this.stageName] / 1000) + this.openTime;
     }
 
-    _assign(stageName: StageNames, activePlayers?: string[]){
-        const activePlayersArr = activePlayers ? new ArraySchema(...activePlayers): new ArraySchema<string>();
+    _assign(stageName: StageNames, activePlayers?: string[]) {
+        const activePlayersArr = activePlayers ? new ArraySchema(...activePlayers) : new ArraySchema<string>();
         return (this as Stage).assign({stageName, activePlayers: activePlayersArr});
     }
 }
