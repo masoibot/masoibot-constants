@@ -1,14 +1,14 @@
 import {EventNames, Roles, SkillNames} from "../enums";
-import {WereWolfEvent} from "./state/WereWolfLog";
+import {Event} from "./state/WereWolfLog";
 import {arraySchema2Array, mapSchema2Object} from "./Utils";
 import {EventData} from "../definitions/EventData";
-import {Player} from "./state/Player";
+import {User} from "./state/User";
 import {Action, State} from "./State";
 import {MapSchema} from "@colyseus/schema";
 
 export function countRoleEvent(state: State, id: string, eventName: EventNames, success?: boolean): number {
-    if (!isPlayerExist(state, id) || state.players.get(id).role == null) return 0;
-    let events = arraySchema2Array<WereWolfEvent>(state.players.get(id).role.roleEvents);
+    if (!isPlayerExist(state, id) || state.users.get(id).role == null) return 0;
+    let events = arraySchema2Array<Event>(state.users.get(id).role.roleEvents);
     return events.filter((e) => {
         const data = mapSchema2Object<EventData>(e.data);
         let successCondition = success ? data.success === success : true;
@@ -18,7 +18,7 @@ export function countRoleEvent(state: State, id: string, eventName: EventNames, 
 
 export function getCurrentTargets(state: State, uid: string, skill: SkillNames): string[] {
     if (isPlayerExist(state, uid)) {
-        const player = state.players.get(uid);
+        const player = state.users.get(uid);
         let actions = state.currentStage.actions
             .filter((a) => {
                 return a.skill === skill && a.from === uid;
@@ -33,7 +33,7 @@ export function getCurrentTargets(state: State, uid: string, skill: SkillNames):
 
 export function getLastTargets(state: State, uid: string, skill: SkillNames, dayNo?: number): string[] {
     if (isPlayerExist(state, uid)) {
-        const player: Player = state.players.get(uid);
+        const player: User = state.users.get(uid);
         let roleEvents = player.role?.roleEvents;
         const events = roleEvents
             ?.filter((e) => {
@@ -51,27 +51,27 @@ export function getLastTargets(state: State, uid: string, skill: SkillNames, day
 }
 
 export function isPlayerExist(state: State, id: string | undefined, alive?: boolean, role?: Roles): boolean {
-    if (id == null || state.players.get(id) == null) return false;
-    let player = state.players.get(id);
+    if (id == null || state.users.get(id) == null) return false;
+    let player = state.users.get(id);
     let roleCondition = role ? player.role.roleID === role : true;
     let aliveCondition = alive != null ? player.alive === alive : true;
     return roleCondition && aliveCondition;
 }
 
-export function getAlivePlayers(state: State): MapSchema<Player> {
-    const {players} = state;
-    let result: MapSchema<Player> = new MapSchema<Player>();
-    players.forEach((value, playersKey) => {
-        if (players.get(playersKey).alive) result.set(playersKey, players.get(playersKey));
+export function getAlivePlayers(state: State): MapSchema<User> {
+    const {users} = state;
+    let result: MapSchema<User> = new MapSchema<User>();
+    users.forEach((value, playersKey) => {
+        if (users.get(playersKey).alive) result.set(playersKey, users.get(playersKey));
     });
     return result;
 }
 
-export function getDeadPlayers(state: State): MapSchema<Player> {
-    const {players} = state;
-    let result: MapSchema<Player> = new MapSchema<Player>();
-    players.forEach((value, playersKey) => {
-        if (!players.get(playersKey).alive) result.set(playersKey, players.get(playersKey));
+export function getDeadPlayers(state: State): MapSchema<User> {
+    const {users} = state;
+    let result: MapSchema<User> = new MapSchema<User>();
+    users.forEach((value, playersKey) => {
+        if (!users.get(playersKey).alive) result.set(playersKey, users.get(playersKey));
     });
     return result;
 }
@@ -106,8 +106,8 @@ export function getPlayersName(state: State, listID: string[] | string | undefin
         // Vẫn phải check vì không biết tại sao react vẫn nhận "target" thay vì ["target"]
         return listID.map((id) => {
             if (isPlayerExist(state, id)) {
-                return `${state.players.get(id).name}${
-                    withSeat && typeof state.players.get(id).seat === "number" ? `(${state.players.get(id).seat})` : ""
+                return `${state.users.get(id).name}${
+                    withSeat && typeof state.users.get(id).seat === "number" ? `(${state.users.get(id).seat})` : ""
                 }`;
             } else return "";
         });

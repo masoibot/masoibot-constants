@@ -1,19 +1,20 @@
-import {ArraySchema, MapSchema, Schema, type} from "@colyseus/schema";
+import {ArraySchema, MapSchema, SetSchema, CollectionSchema, Schema, type} from "@colyseus/schema";
 import {EventNames, StageNames} from "../../enums";
 import {object2MapSchema} from "../Utils";
 import {EventData} from "../../definitions/EventData";
 
-export class WereWolfEvent extends Schema {
-    @type("string") eventName: EventNames;
+export class Event extends Schema {
+    @type("int16") dayNo: number | undefined;
+    @type("string") stageName: StageNames | undefined;
+    @type("string") eventName: EventNames | undefined;
     @type("string") from: string | undefined = undefined;
-    @type({map: "string"}) data: MapSchema<string> = new MapSchema<string>();
-
+    @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
+    @type("string") result: boolean | undefined;
     constructor() {
         super();
     }
-
     _assign(eventName: EventNames, from: string | undefined, data: EventData) {
-        return (this as WereWolfEvent).assign({eventName, from, data: object2MapSchema(data)});
+        return (this as Event).assign({eventName, from});
     }
 }
 
@@ -36,7 +37,7 @@ export const StagesInDay = [
 export class WereWolfLog extends Schema {
     @type("int8") session: SESSION = SESSION.NIGHT;
     @type("int8") dayNo: number = 0;
-    @type([WereWolfEvent]) events: ArraySchema<WereWolfEvent> = new ArraySchema<WereWolfEvent>();
+    @type([Event]) events: ArraySchema<Event> = new ArraySchema<Event>();
 
     constructor() {
         super();
