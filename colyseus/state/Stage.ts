@@ -1,23 +1,11 @@
-import {ArraySchema, SetSchema, filter, Schema, type} from "@colyseus/schema";
-import {StageNames} from "../../enums";
-import {Client} from "colyseus";
-import {Action} from "./Action";
-import {Message} from "./Message";
-import {STAGE_TIMEOUT} from "../../definitions/StageTimeout";
+import {Schema, SetSchema, type} from "@colyseus/schema";
 
 export class Stage extends Schema {
-    @type("string")
-    stageName: StageNames = StageNames.WAITING_STAGE;
+    @type({set: "string"}) activePlayerIDs: SetSchema<string> = new SetSchema<string>();
 
-    @type("int64") // dynamic stage duration
-    duration: number = STAGE_TIMEOUT[this.stageName] / 1000;
-
-    @type({set: "string"}) playerIDs: SetSchema<string> = new SetSchema<string>();
-
-    _assign(stageName: StageNames, playerIds?: string[]) {
+    _assign(playerIds?: string[]) {
         return (this as Stage).assign({
-            stageName,
-            playerIDs: new SetSchema(playerIds ? [...playerIds] : undefined)
+            activePlayerIDs: new SetSchema(playerIds ? [...playerIds] : undefined)
         });
     }
 }

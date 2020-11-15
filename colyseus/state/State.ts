@@ -1,15 +1,14 @@
 import {ArraySchema, filterChildren, MapSchema, Schema, SetSchema, type} from "@colyseus/schema";
 import {Roles, StageNames, TeamNames} from "../../enums";
-import {Event, SESSION} from "./Event";
+import {Action, Event, SESSION} from "./Event";
 import {User} from "./User";
 import {Stage} from "./Stage";
 import {RoomSetting} from "./RoomSetting";
 import {Message} from "./Message";
 import {Client} from "colyseus";
 import {STAGE_TIMEOUT} from "../../definitions/StageTimeout";
-import {Action} from "./Action";
+import {getActivePlayers, getSession} from "../stateUtils";
 
-export * from "./Action";
 export * from "./Message";
 export * from "./User";
 export * from "./Stage";
@@ -22,14 +21,14 @@ export class State extends Schema {
 
     // REPOSITORIES:
 
-    @type({map: User}) // UDR (user data repository)
+    @type({map: User}) // UDR (user data repository): Map<userID, User>
     users: MapSchema<User> = new MapSchema<User>();
 
     @filterChildren(function (this: State, client: Client, key: StageNames, stage: Stage, root: State) {
         const userID = client.auth?.uid;
-        return root.stageName === StageNames.END_GAME || stage.playerIDs.has(userID);
+        return root.stageName === StageNames.END_GAME || stage.activePlayerIDs.has(userID);
     })
-    @type({map: Stage}) // SDR (stage data repository)
+    @type({map: Stage}) // SDR (stage data repository): Map<StageNames, Stage>
     stages: MapSchema<Stage> = new MapSchema<Stage>();
 
     @filterChildren(function (client, key, value: Event, root: State) {
@@ -51,8 +50,9 @@ export class State extends Schema {
 
     @filterChildren(function (client: Client, key, value: Message, root: State) {
         let userID = client.auth?.uid;
+        if (root.spectatorIDs.has(userID)) return true;
         if (root.playerIDs.has(userID)) {
-            return value.fromID === userID || value.toIDs.has(userID);
+            return value.fromID === userID || root.stages.get(value.stageName)?.activePlayerIDs.has(userID);
         }
         return false;
     })
@@ -63,8 +63,8 @@ export class State extends Schema {
         let userID = client.auth?.uid;
         return root._$activePlayers.has(userID);
     })
-    @type([Action]) // ADR (action data repository)
-    actions: ArraySchema<Action> = new ArraySchema<Action>();
+    @type([Action]) // ADR (action data repository) Map<fromId, Action>
+    actions: MapSchema<Action> = new MapSchema<Action>();
 
     // GAME DATA
 
@@ -76,10 +76,8 @@ export class State extends Schema {
 
     @filterChildren(function (this: State, client: Client, key: string, value: Roles, root: State) {
         const userID = client.auth?.uid;
-        if (root.playerIDs.has(userID)) {
-            return key === userID || root.stageName === StageNames.END_GAME;
-        }
-        return false;
+        if (root.spectatorIDs.has(userID)) return true;
+        return root.playerIDs.has(userID) && (key === userID || root.stageName === StageNames.END_GAME);
     })
     @type({map: "uint16"}) // role of each single user
     roleAssignment: MapSchema<Roles> = new MapSchema<Roles>();
@@ -94,7 +92,7 @@ export class State extends Schema {
      * WARNING: return undefined in client-side
      */
     get _$activePlayers() {
-        return this.stages.get(this.stageName)?.playerIDs || new SetSchema<string>();
+        return getActivePlayers(this);
     }
 
     /**
@@ -102,7 +100,6 @@ export class State extends Schema {
      * WARNING: return undefined in client-side
      */
     get _$session(){
-        // TODO: return proper session
-        return SESSION.NIGHT;
+        return getSession(this);
     }
 }

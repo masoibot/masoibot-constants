@@ -3,13 +3,17 @@ import {EventNames, StageNames} from "../../enums";
 import {object2MapSchema} from "../Utils";
 import {EventData} from "../../definitions/EventData";
 
-export class Event extends Schema {
+export class Action extends Schema {
+    @type("string") eventName: EventNames | undefined;
+    @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
+}
+
+export class Event extends Action {
     @type("int16") dayNo: number | undefined;
     @type("string") stageName: StageNames | undefined;
-    @type("string") eventName: EventNames | undefined;
     @type("string") from: string | undefined = undefined;
-    @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
-    @type("string") result: boolean | undefined;
+    @type("boolean") // BE_PAIRED_WITH: true: thirdParty, false: sameParty / SEE: true: werewolf, false: other
+    result: boolean | undefined;
     constructor() {
         super();
     }

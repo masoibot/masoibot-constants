@@ -1,13 +1,17 @@
 import {EventNames, Roles, SkillNames} from "../enums";
 import {Event, SESSION} from "./state/Event";
-import {arraySchema2Array, mapSchema2Object, setSchema2Array} from "./Utils";
-import {EventData} from "../definitions/EventData";
+import {arraySchema2Array, setSchema2Array} from "./Utils";
 import {User} from "./state/User";
 import {Action, State} from "./state/State";
 import {MapSchema, SetSchema} from "@colyseus/schema";
 
 export function getActivePlayers(state: State) {
-    return state.stages.get(state.stageName)?.playerIDs || new SetSchema<string>();
+    return state.stages.get(state.stageName)?.activePlayerIDs || new SetSchema<string>();
+}
+
+export function getSession(state: State) {
+    // TODO: return proper session
+    return SESSION.NIGHT;
 }
 
 export function countRoleEvent(state: State, id: string, eventName: EventNames, success?: boolean): number {
