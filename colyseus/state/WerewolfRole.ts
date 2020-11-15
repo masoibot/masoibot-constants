@@ -1,6 +1,6 @@
 import {ArraySchema, Schema, type} from "@colyseus/schema";
 import {Roles} from "../../enums";
-import {Event} from "./WereWolfLog";
+import {Event} from "./Event";
 
 export class RoleData extends Schema implements IRoleData {
     @type("boolean") skillWorking: boolean = true;

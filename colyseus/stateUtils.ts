@@ -1,9 +1,9 @@
 import {EventNames, Roles, SkillNames} from "../enums";
-import {Event} from "./state/WereWolfLog";
+import {Event} from "./state/Event";
 import {arraySchema2Array, mapSchema2Object} from "./Utils";
 import {EventData} from "../definitions/EventData";
 import {User} from "./state/User";
-import {Action, State} from "./State";
+import {Action, State} from "./state/State";
 import {MapSchema} from "@colyseus/schema";
 
 export function countRoleEvent(state: State, id: string, eventName: EventNames, success?: boolean): number {
