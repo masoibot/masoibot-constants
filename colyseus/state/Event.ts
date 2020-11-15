@@ -5,25 +5,36 @@ import {EventData} from "../../definitions/EventData";
 
 export class Action extends Schema {
     @type("string") eventName: EventNames | undefined;
+    @type("string") from: string | undefined = undefined;
     @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
+
+    constructor() {
+        super();
+    }
+    _assign(
+        eventName?: EventNames,
+        from?: string,
+        targets: string[] = [],
+    ) {
+        return (this as Action).assign({eventName, from, targets: new SetSchema<string>(targets)});
+    }
 }
 
 export class Event extends Action {
     @type("int16") dayNo: number | undefined;
     @type("string") stageName: StageNames | undefined;
-    @type("string") from: string | undefined = undefined;
     @type("boolean") // BE_PAIRED_WITH: true: thirdParty, false: sameParty / SEE: true: werewolf, false: other
     result: boolean | undefined;
     constructor() {
         super();
     }
     _assign(
-        dayNo?: number,
-        stageName?: StageNames,
         eventName?: EventNames,
         from?: string,
         targets: string[] = [],
         result?: boolean,
+        stageName?: StageNames,
+        dayNo?: number,
     ) {
         return (this as Event).assign({dayNo, stageName, eventName, from, targets: new SetSchema<string>(targets), result});
     }

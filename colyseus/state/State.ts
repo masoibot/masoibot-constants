@@ -64,7 +64,7 @@ export class State extends Schema {
         return root._$activePlayers.has(userID);
     })
     @type([Action]) // ADR (action data repository) Map<fromId, Action>
-    actions: MapSchema<Action> = new MapSchema<Action>();
+    actions: ArraySchema<Action> = new ArraySchema<Action>();
 
     // GAME DATA
 
@@ -73,6 +73,9 @@ export class State extends Schema {
 
     @type({set: "string"}) // Danh sách người chơi
     playerIDs: SetSchema<string> = new SetSchema<string>();
+
+    @type({set: "string"}) // Danh sách người vừa/sẽ chết
+    deadMenIDs: SetSchema<string> = new SetSchema<string>();
 
     @filterChildren(function (this: State, client: Client, key: string, value: Roles, root: State) {
         const userID = client.auth?.uid;
