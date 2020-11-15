@@ -6,9 +6,10 @@ export class User extends Schema {
     @type("string") name: string = "";
     @type("string") avatar: string = "";
     @type("uint8") seat: number = 0;
+    @type("boolean") online: boolean = true;
     @type("boolean") alive: boolean = true;
 
-    _assign(seat: number, playerId: string, name: string, avatar: string) {
-        return (this as User).assign({seat, userID: playerId, name, avatar});
+    _assign(userID: string, name: string, avatar: string, seat: number = 0) {
+        return (this as User).assign({userID, name, avatar, seat});
     }
 }

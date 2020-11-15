@@ -1,25 +1,28 @@
 import {EventNames, Roles, SkillNames} from "../enums";
-import {Event} from "./state/Event";
-import {arraySchema2Array, mapSchema2Object} from "./Utils";
+import {Event, SESSION} from "./state/Event";
+import {arraySchema2Array, mapSchema2Object, setSchema2Array} from "./Utils";
 import {EventData} from "../definitions/EventData";
 import {User} from "./state/User";
 import {Action, State} from "./state/State";
-import {MapSchema} from "@colyseus/schema";
+import {MapSchema, SetSchema} from "@colyseus/schema";
+
+export function getActivePlayers(state: State) {
+    return state.stages.get(state.stageName)?.playerIDs || new SetSchema<string>();
+}
 
 export function countRoleEvent(state: State, id: string, eventName: EventNames, success?: boolean): number {
-    if (!isPlayerExist(state, id) || state.users.get(id).role == null) return 0;
-    let events = arraySchema2Array<Event>(state.users.get(id).role.roleEvents);
-    return events.filter((e) => {
-        const data = mapSchema2Object<EventData>(e.data);
-        let successCondition = success ? data.success === success : true;
-        return e.eventName === eventName && successCondition;
+    if (!isPlayerExist(state, id)) return 0; // || state.users.get(id).role == null
+    // let events = arraySchema2Array<Event>(state.users.get(id).role.roleEvents);
+    return state.events.filter((e) => {
+        // const data = mapSchema2Object<EventData>(e.data);
+        return e.from === id && e.eventName === eventName && (success == null || e.result === success);
     }).length;
 }
 
 export function getCurrentTargets(state: State, uid: string, skill: SkillNames): string[] {
     if (isPlayerExist(state, uid)) {
         const player = state.users.get(uid);
-        let actions = state.currentStage.actions
+        let actions = state.actions
             .filter((a) => {
                 return a.skill === skill && a.from === uid;
             })
@@ -33,18 +36,16 @@ export function getCurrentTargets(state: State, uid: string, skill: SkillNames):
 
 export function getLastTargets(state: State, uid: string, skill: SkillNames, dayNo?: number): string[] {
     if (isPlayerExist(state, uid)) {
-        const player: User = state.users.get(uid);
-        let roleEvents = player.role?.roleEvents;
-        const events = roleEvents
+        const events: Event[] = state.events
             ?.filter((e) => {
-                let data = mapSchema2Object<EventData>(e.data);
-                let dayNoCondition = dayNo ? data.dayNo === dayNo : true;
+                // let data = mapSchema2Object<EventData>(e.data);
+                let dayNoCondition = dayNo == null || e.dayNo === dayNo;
                 return dayNoCondition && e.eventName === skill;
             })
             .reverse();
         if (events && events.length > 0) {
-            let data = mapSchema2Object<EventData>(events[0].data);
-            return data.targets;
+            // let data = mapSchema2Object<EventData>(events[0].data);
+            return setSchema2Array(events[0].targets);
         }
     }
     return [];
@@ -52,15 +53,16 @@ export function getLastTargets(state: State, uid: string, skill: SkillNames, day
 
 export function isPlayerExist(state: State, id: string | undefined, alive?: boolean, role?: Roles): boolean {
     if (id == null || state.users.get(id) == null) return false;
-    let player = state.users.get(id);
-    let roleCondition = role ? player.role.roleID === role : true;
-    let aliveCondition = alive != null ? player.alive === alive : true;
+    const player = state.users.get(id);
+    const roleId = state.roleAssignment.get(id);
+    const roleCondition = role == null || roleId === role;
+    const aliveCondition = alive == null || player.alive === alive;
     return roleCondition && aliveCondition;
 }
 
 export function getAlivePlayers(state: State): MapSchema<User> {
     const {users} = state;
-    let result: MapSchema<User> = new MapSchema<User>();
+    const result: MapSchema<User> = new MapSchema<User>();
     users.forEach((value, playersKey) => {
         if (users.get(playersKey).alive) result.set(playersKey, users.get(playersKey));
     });
@@ -77,7 +79,7 @@ export function getDeadPlayers(state: State): MapSchema<User> {
 }
 
 export function getMaxVoted(state: State): string | null {
-    const actions: Action[] = state.currentStage.actions.filter((action) => action.skill !== SkillNames.SKIP);
+    const actions: Action[] = state.actions.filter((action) => action.skill !== SkillNames.SKIP);
     let result: string | null = null;
     let countMap = new MapSchema<number>();
     for (const action of actions) {

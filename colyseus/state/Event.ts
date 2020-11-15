@@ -13,8 +13,15 @@ export class Event extends Schema {
     constructor() {
         super();
     }
-    _assign(eventName: EventNames, from: string | undefined, data: EventData) {
-        return (this as Event).assign({eventName, from});
+    _assign(
+        dayNo?: number,
+        stageName?: StageNames,
+        eventName?: EventNames,
+        from?: string,
+        targets: string[] = [],
+        result?: boolean,
+    ) {
+        return (this as Event).assign({dayNo, stageName, eventName, from, targets: new SetSchema<string>(targets), result});
     }
 }
 

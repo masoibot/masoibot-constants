@@ -1,4 +1,4 @@
-import {ArraySchema, MapSchema} from "@colyseus/schema";
+import {ArraySchema, MapSchema, SetSchema} from "@colyseus/schema";
 import {IAction} from "./MessageTypes";
 import {Random} from "../utils/Random";
 import {Action} from "./state/Action";
@@ -10,6 +10,25 @@ export function array2ArraySchema<T>(source: T[]): ArraySchema<T> {
         result.push(item);
     }
     return result;
+}
+
+export function setSchema2Array<T>(source: SetSchema<T>): T[] {
+    if (source == null || !source.size) return [];
+    let result: T[] = [];
+    source.forEach(value => result.push(value))
+    return result;
+}
+
+export function setSchema2Set<T>(source: SetSchema<T>): Set<T> {
+    return new Set<T>(setSchema2Array(source));
+}
+
+export function array2SetSchema<T>(source: T[]): SetSchema<T> {
+    return new SetSchema<T>(source);
+}
+
+export function set2SetSchema<T>(source: Set<T>): SetSchema<T> {
+    return new SetSchema<T>([...source]);
 }
 
 export function arraySchema2Array<T>(source: ArraySchema<T>): T[] {

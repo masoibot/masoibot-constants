@@ -39,7 +39,7 @@ export class State extends Schema {
             return (
                 value.from === userID ||
                 // players trong 1 stage được xem các event trong stage đó
-                (value.dayNo === root.dayNo && value.stageName === root.stageName && root.activePlayers.has(userID)) ||
+                (value.dayNo === root.dayNo && value.stageName === root.stageName && root._$activePlayers.has(userID)) ||
                 // mọi players được xem các event khi trò chơi kết thúc
                 root.stageName === StageNames.END_GAME
             );
@@ -61,7 +61,7 @@ export class State extends Schema {
 
     @filterChildren(function (client: Client, key: number, value: Action, root: State) {
         let userID = client.auth?.uid;
-        return root.activePlayers.has(userID);
+        return root._$activePlayers.has(userID);
     })
     @type([Action]) // ADR (action data repository)
     actions: ArraySchema<Action> = new ArraySchema<Action>();
@@ -93,7 +93,7 @@ export class State extends Schema {
      * return activePlayers of current Stage
      * WARNING: return undefined in client-side
      */
-    get activePlayers() {
+    get _$activePlayers() {
         return this.stages.get(this.stageName)?.playerIDs || new SetSchema<string>();
     }
 
@@ -101,7 +101,7 @@ export class State extends Schema {
      * return session of current Stage
      * WARNING: return undefined in client-side
      */
-    get session(){
+    get _$session(){
         // TODO: return proper session
         return SESSION.NIGHT;
     }
