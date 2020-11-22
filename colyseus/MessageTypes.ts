@@ -28,9 +28,9 @@ export enum RoomNoticeTypes {
     ROOM_SETTING_UPDATED = "ROOM_SETTING_UPDATED"
 }
 
-export interface IRoomNotice {
+export interface IRoomNotice<D = any> {
     type: RoomNoticeTypes;
-    data: any;
+    data: D;
 }
 
 export enum MessageTypes {

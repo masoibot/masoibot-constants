@@ -1,10 +1,8 @@
-import {ArraySchema, MapSchema, SetSchema, CollectionSchema, Schema, type} from "@colyseus/schema";
-import {EventNames, StageNames} from "../../enums";
-import {object2MapSchema} from "../Utils";
-import {EventData} from "../../definitions/EventData";
+import {ArraySchema, Schema, SetSchema, type} from "@colyseus/schema";
+import {EventNames, SkillNames, StageNames} from "../../enums";
 
 export class Action extends Schema {
-    @type("string") eventName: EventNames | undefined;
+    @type("string") name: EventNames | undefined;
     @type("string") from: string | undefined = undefined;
     @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
 
@@ -12,31 +10,52 @@ export class Action extends Schema {
         super();
     }
     _assign(
-        eventName?: EventNames,
-        from?: string,
-        targets: string[] = [],
+        name: SkillNames,
+        from: string | undefined,
+        targetIds: string[] = [],
+        result?: EventResult,
+        stageName?: StageNames,
+        dayNo?: number
     ) {
-        return (this as Action).assign({eventName, from, targets: new SetSchema<string>(targets)});
+        const targets = new SetSchema<string>(targetIds);
+        return (this as Action).assign({name, from, targets});
     }
+}
+
+export enum EventResult {
+    // COMMON:
+    FAILED,
+    SUCCESS,
+    // COUPLE:
+    THIRD_PARTY,
+    WOLF_PARTY,
+    VILLAGER_PARTY,
+    // SEER:
+    SEE_WEREWOLF,
+    SEE_VILLAGER,
+    // OLD_MAN
+    YOLO,
+    DIED
 }
 
 export class Event extends Action {
     @type("int16") dayNo: number | undefined;
     @type("string") stageName: StageNames | undefined;
-    @type("boolean") // BE_PAIRED_WITH: true: thirdParty, false: sameParty / SEE: true: werewolf, false: other
-    result: boolean | undefined;
+    @type("uint8") result: EventResult | undefined;
+
     constructor() {
         super();
     }
     _assign(
-        eventName?: EventNames,
-        from?: string,
-        targets: string[] = [],
-        result?: boolean,
-        stageName?: StageNames,
-        dayNo?: number,
+        name: EventNames,
+        from: string | undefined,
+        targetIds: string[] = [],
+        result: EventResult | undefined,
+        stageName: StageNames,
+        dayNo: number
     ) {
-        return (this as Event).assign({dayNo, stageName, eventName, from, targets: new SetSchema<string>(targets), result});
+        const targets = new SetSchema<string>(targetIds);
+        return (this as Event).assign({dayNo, stageName, name, from, targets, result});
     }
 }
 

@@ -17,7 +17,7 @@ export enum SetupErrorTypes {
     ADMIN_NOT_MATCH = "ADMIN_NOT_MATCH"
 }
 
-export interface ISetupError {
+export interface ISetupError<D = any> {
     type: SetupErrorTypes;
-    data: any[];
+    data: D[];
 }

@@ -1,5 +1,4 @@
 import {Schema, type} from "@colyseus/schema";
-import {WerewolfRole} from "./WerewolfRole";
 
 export class User extends Schema {
     @type("string") userID: string = "";

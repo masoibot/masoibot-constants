@@ -1,21 +1,22 @@
 import {ArraySchema, MapSchema, SetSchema} from "@colyseus/schema";
 import {IAction} from "./MessageTypes";
 import {Random} from "../utils/Random";
-import {Action} from "./state/Action";
+import {Action} from "./state/Event";
 
 export function array2ArraySchema<T>(source: T[]): ArraySchema<T> {
     if (source == null || !source.length) return new ArraySchema<T>();
-    let result = new ArraySchema();
-    for (const item of source) {
-        result.push(item);
-    }
-    return result;
+    return new ArraySchema<T>(...source);
+    // let result = new ArraySchema();
+    // for (const item of source) {
+    //     result.push(item);
+    // }
+    // return result;
 }
 
 export function setSchema2Array<T>(source: SetSchema<T>): T[] {
     if (source == null || !source.size) return [];
     let result: T[] = [];
-    source.forEach(value => result.push(value))
+    source.forEach((value) => result.push(value));
     return result;
 }
 
@@ -33,11 +34,12 @@ export function set2SetSchema<T>(source: Set<T>): SetSchema<T> {
 
 export function arraySchema2Array<T>(source: ArraySchema<T>): T[] {
     if (source == null || !source.length) return [];
-    let result: T[] = [];
-    for (const item of source) {
-        result.push(item);
-    }
-    return result;
+    return source.map((v) => v);
+    // let result: T[] = [];
+    // for (const item of source) {
+    //     result.push(item);
+    // }
+    // return result;
 }
 
 export function mapSchemaNumber2Array(source: MapSchema<number>): number[] {
@@ -103,16 +105,32 @@ export function getRandomKeyFromMapSchema<T>(source: MapSchema<T>): string {
     return keyList[randomIndex];
 }
 
+export function getMultipleUniqueRandomKeyFromMapSchema<T>(
+    source: MapSchema<T>,
+    count: number = 1,
+    exceptionList: string[] = []
+): string[] {
+    const result: string[] = [];
+    let i = 0;
+    exceptionList.forEach((item) => source.delete(item));
+    while (i < count) {
+        const key = getRandomKeyFromMapSchema(source);
+        source.delete(key);
+        result[i++] = key;
+    }
+    return result;
+}
+
 export function action2IAction(source: Action): IAction {
-    return {
+    return <IAction>{
         from: source.from,
-        targets: arraySchema2Array(source.targets),
-        skill: source.skill
+        targets: setSchema2Array(source.targets),
+        skill: source.name
     };
 }
 
 export function iAction2Action(source: IAction): Action {
-    return new Action()._assign(source.from, source.skill, array2ArraySchema<string>(source.targets));
+    return new Action()._assign(source.skill, source.from, array2ArraySchema<string>(source.targets));
 }
 
 export function mapSchema2Array<T>(source: MapSchema<T>): T[] {

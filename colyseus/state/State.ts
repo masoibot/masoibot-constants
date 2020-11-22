@@ -1,20 +1,14 @@
 import {ArraySchema, filterChildren, MapSchema, Schema, SetSchema, type} from "@colyseus/schema";
 import {Roles, StageNames, TeamNames} from "../../enums";
-import {Action, Event, SESSION} from "./Event";
+import {Action, Event} from "./Event";
 import {User} from "./User";
-import {Stage} from "./Stage";
+import {StageInfo} from "./StageInfo";
 import {RoomSetting} from "./RoomSetting";
 import {Message} from "./Message";
 import {Client} from "colyseus";
 import {STAGE_TIMEOUT} from "../../definitions/StageTimeout";
 import {getActivePlayers, getSession} from "../stateUtils";
-
-export * from "./Message";
-export * from "./User";
-export * from "./Stage";
-export * from "./Event";
-export * from "./WerewolfRole";
-export * from "./RoomSetting";
+import {PrivateUserData} from "./PrivateUserData";
 
 export class State extends Schema {
     @type(RoomSetting) roomSetting: RoomSetting = new RoomSetting();
@@ -24,12 +18,16 @@ export class State extends Schema {
     @type({map: User}) // UDR (user data repository): Map<userID, User>
     users: MapSchema<User> = new MapSchema<User>();
 
-    @filterChildren(function (this: State, client: Client, key: StageNames, stage: Stage, root: State) {
+    @filterChildren((client: Client, key: string) => client.auth?.uid === key)
+    @type({map: PrivateUserData}) // Map<userID, PrivateUserData>
+    usersData: MapSchema<PrivateUserData> = new MapSchema<PrivateUserData>();
+
+    @filterChildren(function (this: State, client: Client, key: StageNames, stage: StageInfo, root: State) {
         const userID = client.auth?.uid;
         return root.stageName === StageNames.END_GAME || stage.activePlayerIDs.has(userID);
     })
-    @type({map: Stage}) // SDR (stage data repository): Map<StageNames, Stage>
-    stages: MapSchema<Stage> = new MapSchema<Stage>();
+    @type({map: StageInfo}) // SDR (stage data repository): Map<StageNames, StageInfo>
+    listStages: MapSchema<StageInfo> = new MapSchema<StageInfo>();
 
     @filterChildren(function (client, key, value: Event, root: State) {
         let userID = client.auth?.uid;
@@ -38,7 +36,9 @@ export class State extends Schema {
             return (
                 value.from === userID ||
                 // players trong 1 stage được xem các event trong stage đó
-                (value.dayNo === root.dayNo && value.stageName === root.stageName && root._$activePlayers.has(userID)) ||
+                (value.dayNo === root.dayNo &&
+                    value.stageName === root.stageName &&
+                    root._$activePlayers.has(userID)) ||
                 // mọi players được xem các event khi trò chơi kết thúc
                 root.stageName === StageNames.END_GAME
             );
@@ -52,7 +52,7 @@ export class State extends Schema {
         let userID = client.auth?.uid;
         if (root.spectatorIDs.has(userID)) return true;
         if (root.playerIDs.has(userID)) {
-            return value.fromID === userID || root.stages.get(value.stageName)?.activePlayerIDs.has(userID);
+            return value.fromID === userID || root.listStages.get(value.stageName)?.activePlayerIDs.has(userID);
         }
         return false;
     })
@@ -91,7 +91,7 @@ export class State extends Schema {
     @type("uint64") closeTime: number = Math.floor(Date.now() + STAGE_TIMEOUT[this.stageName] / 1000);
 
     /**
-     * return activePlayers of current Stage
+     * return activePlayers of current StageInfo
      * WARNING: return undefined in client-side
      */
     get _$activePlayers() {
@@ -99,10 +99,10 @@ export class State extends Schema {
     }
 
     /**
-     * return session of current Stage
+     * return session of current StageInfo
      * WARNING: return undefined in client-side
      */
-    get _$session(){
+    get _$session() {
         return getSession(this);
     }
 }
