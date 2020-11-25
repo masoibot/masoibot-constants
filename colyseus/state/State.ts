@@ -8,7 +8,6 @@ import {Message} from "./Message";
 import {Client} from "colyseus";
 import {STAGE_TIMEOUT} from "../../definitions/StageTimeout";
 import {getActivePlayers, getSession} from "../stateUtils";
-import {PrivateUserData} from "./PrivateUserData";
 
 export class State extends Schema {
     @type(RoomSetting) roomSetting: RoomSetting = new RoomSetting();
@@ -17,10 +16,6 @@ export class State extends Schema {
 
     @type({map: User}) // UDR (user data repository): Map<userID, User>
     users: MapSchema<User> = new MapSchema<User>();
-
-    @filterChildren((client: Client, key: string) => client.auth?.uid === key)
-    @type({map: PrivateUserData}) // Map<userID, PrivateUserData>
-    usersData: MapSchema<PrivateUserData> = new MapSchema<PrivateUserData>();
 
     @filterChildren(function (this: State, client: Client, key: StageNames, stage: StageInfo, root: State) {
         const userID = client.auth?.uid;

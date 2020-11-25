@@ -2,7 +2,7 @@ import {ArraySchema, Schema, SetSchema, type} from "@colyseus/schema";
 import {EventNames, SkillNames, StageNames} from "../../enums";
 
 export class Action extends Schema {
-    @type("string") name: EventNames | undefined;
+    @type("string") name: EventNames = EventNames.NO_EVENT;
     @type("string") from: string | undefined = undefined;
     @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
 
