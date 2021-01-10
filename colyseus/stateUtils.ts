@@ -9,9 +9,17 @@ export function getActivePlayers(state: State) {
 }
 
 export function getSession(state: State) {
-    return (StagesInDay.includes(state.stageName))? SESSION.DAY:SESSION.NIGHT
+    return StagesInDay.includes(state.stageName) ? SESSION.DAY : SESSION.NIGHT;
 }
 
+/**
+ * Đếm số lượng của 1 kiểu event của 1 người chơi
+ * (Dùng cho các người chơi nhân vật đặc biệt, VD: Phù thuỳ biết mình đã dùng bao nhiêu bình cứu, già làng biết đã bị cắn bao nhiêu lần)
+ * @param state
+ * @param id
+ * @param eventName
+ * @param result
+ */
 export function countRoleEvent(state: State, id: string, eventName: EventNames, result?: EventResult): number {
     if (!isPlayerExist(state, id)) return 0; // || state.users.get(id).role == null
     // let events = arraySchema2Array<Event>(state.users.get(id).role.roleEvents);
@@ -21,21 +29,34 @@ export function countRoleEvent(state: State, id: string, eventName: EventNames, 
     }).length;
 }
 
+/**
+ * Lấy ra targets của action đầu tiên trong stage (dùng cho các state có 1 action như Witch, Hunter). note: các action được reset sau mỗi stage
+ * @param state
+ * @param uid
+ * @param skill
+ */
 export function getCurrentTargets(state: State, uid: string, skill: SkillNames): string[] {
     if (isPlayerExist(state, uid)) {
-        const player = state.users.get(uid);
         let actions = state.actions
             .filter((a) => {
                 return a.name === skill && a.from === uid;
             })
             .reverse();
         if (actions.length > 0) {
-            return arraySchema2Array(actions[0].targets);
+            return actions[0].targets.toArray();
         }
     }
     return [];
 }
 
+/**
+ * Lấy ra targets gần đây nhất từ 1 Action của 1 nhân vật tại 1 ngày trong game.
+ * Sử dụng cho xử lý điều kiện ở 1 số stage đặc biệt (VD: Stage sói cần check người bị cắn có được bảo vệ trước đó hay không)
+ * @param state
+ * @param uid
+ * @param skill
+ * @param dayNo
+ */
 export function getLastTargets(state: State, uid: string, skill: SkillNames, dayNo?: number): string[] {
     if (isPlayerExist(state, uid)) {
         const events: Event[] = state.events

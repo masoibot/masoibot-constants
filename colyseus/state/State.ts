@@ -40,6 +40,9 @@ export class State extends Schema {
         }
         return false;
     })
+    @type([Action]) // ADR (action data repository) Map<fromId, Action>
+    actions: ArraySchema<Action> = new ArraySchema<Action>();
+
     @type([Event]) // EDR (event data repository)
     events: ArraySchema<Event> = new ArraySchema<Event>();
 
@@ -58,11 +61,8 @@ export class State extends Schema {
         let userID = client.auth?.uid;
         return root._$activePlayers.has(userID);
     })
-    @type([Action]) // ADR (action data repository) Map<fromId, Action>
-    actions: ArraySchema<Action> = new ArraySchema<Action>();
 
     // GAME DATA
-
     @type({set: "string"}) // Khán giả
     spectatorIDs: SetSchema<string> = new SetSchema<string>();
 
