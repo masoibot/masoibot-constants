@@ -1,11 +1,19 @@
 import {EventNames, Roles, SkillNames} from "../enums";
 import {arraySchema2Array, setSchema2Array} from "./Utils";
-import {Action, SESSION, StagesInDay, State, User} from "./state";
-import {Event, EventResult} from "./state";
+import {Action, Event, EventResult, SESSION, StagesInDay, State, User} from "./state";
 import {MapSchema, SetSchema} from "@colyseus/schema";
 
+/**
+ * getActivePlayers return activePlayer in current stage (each state.stageName)
+ * NOTE1: stages with full players don't need to be defined in state.listStages
+ *      so by default activePlayer is state.playerIds
+ * NOTE2: stages is defined in state,listStages but activePlayerIDs is null/undefined
+ *      it must be in client-side state where activePlayerIDs is filtered to null/undefined
+ * @param state
+ */
 export function getActivePlayers(state: State) {
-    return state.listStages.get(state.stageName)?.activePlayerIDs || new SetSchema<string>();
+    const stage = state.listStages.get(state.stageName);
+    return stage != null ? stage.activePlayerIDs || new SetSchema<string>() : state.playerIDs;
 }
 
 export function getSession(state: State) {

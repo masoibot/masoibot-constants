@@ -80,7 +80,7 @@ export class State extends Schema {
     @type({map: "uint16"}) // role of each single user
     roleAssignment: MapSchema<Roles> = new MapSchema<Roles>();
 
-    @type("uint8") winTeam: TeamNames = TeamNames.NO_TEAM;
+    @type("int8") winTeam: TeamNames = TeamNames.NO_TEAM;
     @type("uint8") dayNo: number = 1;
     @type("string") stageName: StageNames = StageNames.WAITING_STAGE;
     @type("uint64") closeTime: number = Math.floor(Date.now() + STAGE_TIMEOUT[this.stageName] / 1000);
