@@ -36,6 +36,7 @@ export interface IRoomNotice<D = any> {
 export enum MessageTypes {
     ACTION = "ACTION",
     CHAT = "CHAT",
+    START_GAME_REFUSED = "START_GAME_REFUSED",
     CHAT_REFUSED = "CHAT_REFUSED",
     ADMIN_ACTION = "ADMIN_ACTION",
     ACTION_RESULT = "ACTION_RESULT",

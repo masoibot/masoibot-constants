@@ -1,5 +1,5 @@
-import {DEFAULT_AVATAR} from "../../../../const";
-import {getBotPlatformName} from "../../../chatbot-core/bot-platforms/Platforms";
+export const DEFAULT_AVATAR =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRiPTRl5x5DEr1_O3TXqt7V7nFLO9UzDwcoMA&usqp=CAU";
 
 export interface IUserCredential {
     userID: string;
@@ -34,10 +34,4 @@ export function createIUser(uid: string = "undefined!", name: string = uid, avat
         online: true,
         alive: true
     };
-}
-
-export function getChatbotPlatformName(user: IUser) {
-    let splits = user.userID.split("-");
-    if (splits.length === 2) return getBotPlatformName(splits[0]);
-    return "";
 }

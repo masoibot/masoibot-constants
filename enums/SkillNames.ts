@@ -5,8 +5,8 @@ export enum SkillNames {
     POINT = "POINT",
 
     VOTE = "VOTE",
-    VOTE_YES = "VOTE_YES",
-    VOTE_NO = "VOTE_NO",
+    VOTE_SAVE = "VOTE_SAVE",
+    VOTE_HANG = "VOTE_HANG",
     BITE = "BITE",
     SEE = "SEE",
     PROTECT = "PROTECT",

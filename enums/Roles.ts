@@ -8,7 +8,7 @@ export enum Roles {
     ANGEL,
     CUPID,
     SEER,
-    SAVER,
+    SAVIOR,
     HUNTER,
     WITCH,
     OLD_MAN,
@@ -64,7 +64,7 @@ export const ROLE_NAMES: {[role in Roles]: string} = {
     [Roles.WILD_CHILD]: "CON HOANG",
     // PHE DÂN
     [Roles.SEER]: "TIÊN TRI",
-    [Roles.SAVER]: "BẢO VỆ",
+    [Roles.SAVIOR]: "BẢO VỆ",
     [Roles.HUNTER]: "THỢ SĂN",
     [Roles.VILLAGER]: "DÂN",
     [Roles.WITCH]: "PHÙ THỦY",

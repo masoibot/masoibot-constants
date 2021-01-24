@@ -1,6 +1,7 @@
 import {SkillNames} from "./SkillNames";
 
 export enum mEventNames {
+    VOTE_YES_NO = "VOTE_YES_NO",
     BE_CURSED = "BE_CURSED",
     BE_PAIRED_WITH = "BE_PAIRED_WITH",
     SEE_MOTHER_DIE = "SEE_MOTHER_DIE",
@@ -16,8 +17,8 @@ export const EventNames = {...SkillNames, ...mEventNames};
 
 export const EVENTS: EventNames[] = [
     EventNames.VOTE,
-    EventNames.VOTE_YES,
-    EventNames.VOTE_NO,
+    EventNames.VOTE_SAVE,
+    EventNames.VOTE_HANG,
     EventNames.BITE,
     EventNames.SEE,
     EventNames.SAVE,

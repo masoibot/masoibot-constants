@@ -2,7 +2,7 @@ import {ArraySchema, Schema, SetSchema, type} from "@colyseus/schema";
 import {EventNames, SkillNames, StageNames} from "../../enums";
 
 export class Action extends Schema {
-    @type("string") name: EventNames = EventNames.NO_EVENT;
+    @type("string") name: SkillNames = SkillNames.POINT;
     @type("string") from: string | undefined = undefined;
     @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
 
@@ -13,9 +13,6 @@ export class Action extends Schema {
         name: SkillNames,
         from: string | undefined,
         targetIds: string[] = [],
-        result?: EventResult,
-        stageName?: StageNames,
-        dayNo?: number
     ) {
         const targets = new SetSchema<string>(targetIds);
         return (this as Action).assign({name, from, targets});
@@ -33,21 +30,28 @@ export enum EventResult {
     // SEER:
     SEE_WEREWOLF,
     SEE_VILLAGER,
-    // OLD_MAN
+    // OLD_MAN YOLO: you only live once
     YOLO,
     DIED
 }
 
-export class Event extends Action {
+export class Event extends Schema {
+    @type("string") name: EventNames = EventNames.NO_EVENT;
+    @type(["string"]) to: string[] = [];
+
+    @type("string") from: string | undefined = undefined;
+    @type({set: "string"}) targets: SetSchema<string> = new SetSchema<string>();
+    @type("uint8") result: EventResult | undefined;
+
     @type("int16") dayNo: number | undefined;
     @type("string") stageName: StageNames | undefined;
-    @type("uint8") result: EventResult | undefined;
 
     constructor() {
         super();
     }
     _assign(
         name: EventNames,
+        to: string[],
         from: string | undefined,
         targetIds: string[] = [],
         result: EventResult | undefined,
@@ -55,7 +59,7 @@ export class Event extends Action {
         dayNo: number
     ) {
         const targets = new SetSchema<string>(targetIds);
-        return (this as Event).assign({dayNo, stageName, name, from, targets, result});
+        return (this as Event).assign({name, to, from, targets, result, dayNo, stageName});
     }
 }
 

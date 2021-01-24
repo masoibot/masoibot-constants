@@ -58,7 +58,9 @@ export class State extends Schema {
         let userID = client.auth?.uid;
         return root._$activePlayers.has(userID);
     })
-    @type([Action]) // ADR (action data repository) Map<fromId, Action>
+    // ADR (action data repository): actions include Point actions and Non-Point actions.
+    // One user can send each action type once.
+    @type([Action])
     actions: ArraySchema<Action> = new ArraySchema<Action>();
 
     // GAME DATA

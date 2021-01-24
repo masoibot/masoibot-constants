@@ -9,7 +9,7 @@ export const ROLE_MAX: {[role in Roles]: number} = {
     [Roles.WILD_CHILD]: 1,
     // PHE DÂN
     [Roles.SEER]: 1,
-    [Roles.SAVER]: 1,
+    [Roles.SAVIOR]: 1,
     [Roles.HUNTER]: 1,
     [Roles.VILLAGER]: 19, // Game tối đa 20 người, phải có ít nhất 1 sói
     [Roles.WITCH]: 1,
@@ -58,7 +58,7 @@ export const ROLE_POINT: {[role in Roles]: number} = {
     [Roles.WOLF_PLUS]: -9,
     // PHE DÂN
     [Roles.SEER]: 3,
-    [Roles.SAVER]: 3,
+    [Roles.SAVIOR]: 3,
     [Roles.HUNTER]: 3,
     [Roles.VILLAGER]: 1,
     [Roles.WITCH]: 5,
@@ -106,7 +106,7 @@ export const FakeID: {[r in Roles]: string} = {
     [Roles.WILD_CHILD]: "wildchild",
     // PHE DÂN
     [Roles.SEER]: "seer",
-    [Roles.SAVER]: "saver",
+    [Roles.SAVIOR]: "saver",
     [Roles.HUNTER]: "hunter",
     [Roles.VILLAGER]: "villager",
     [Roles.WITCH]: "witch",

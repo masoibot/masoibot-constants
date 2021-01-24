@@ -6,7 +6,7 @@ export const ROLE_REQUIRE_ROLES: {[r in Roles]: Roles[]} = {
     [Roles.CURSED]: [],
     [Roles.WOLF_PLUS]: [],
     [Roles.SEER]: [],
-    [Roles.SAVER]: [],
+    [Roles.SAVIOR]: [],
     [Roles.HUNTER]: [],
     [Roles.VILLAGER]: [],
     [Roles.WITCH]: [],
@@ -51,7 +51,7 @@ export const ROLE_REQUIRE_MIN_PLAYER: {[r in Roles]: number} = {
     [Roles.WEREWOLF]: 4,
     [Roles.VILLAGER]: 4,
     [Roles.SEER]: 4,
-    [Roles.SAVER]: 4,
+    [Roles.SAVIOR]: 4,
     [Roles.HUNTER]: 5,
     [Roles.CURSED]: 5,
     [Roles.LYCAN]: 5,
@@ -96,7 +96,7 @@ export const ROLE_REQUIRE_MIN_PLAYER: {[r in Roles]: number} = {
 
 export const BASE_ROLE_1 = [Roles.VILLAGER];
 export const BASE_ROLE_2 = [...BASE_ROLE_1, Roles.SEER];
-export const BASE_ROLE_3 = [...BASE_ROLE_2, Roles.SAVER];
+export const BASE_ROLE_3 = [...BASE_ROLE_2, Roles.SAVIOR];
 export const BASE_ROLE_4 = [...BASE_ROLE_3, Roles.HUNTER];
 export const BASE_ROLE_5 = [...BASE_ROLE_4, Roles.CUPID];
 export const BASE_ROLE_6 = [...BASE_ROLE_5, Roles.OLD_MAN];

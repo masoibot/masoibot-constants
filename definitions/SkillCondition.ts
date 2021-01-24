@@ -17,8 +17,18 @@ export const SKILL_ALLOWED_IN_STAGE: {[stage in StageNames]: SkillNames[]} = {
     DISCUSS: [SkillNames.SKIP, SkillNames.POINT],
     VOTE: [SkillNames.VOTE, SkillNames.SKIP, SkillNames.POINT],
     LAST_WORD: [SkillNames.SKIP],
-    VOTE_YES_NO: [SkillNames.VOTE_YES, SkillNames.VOTE_NO],
+    VOTE_YES_NO: [SkillNames.VOTE_SAVE, SkillNames.VOTE_HANG],
     END_OF_DAY: [SkillNames.SKIP]
+};
+export const STAGE_MANDATORY_SKILLS: {[stage in StageNames]?: SkillNames} = {
+    [StageNames.CUPID]: SkillNames.PAIRING,
+    [StageNames.WILD_CHILD]: SkillNames.CHOOSE_MOTHER,
+    [StageNames.SEER]: SkillNames.SEE,
+    [StageNames.SAVIOR]: SkillNames.PROTECT,
+    [StageNames.WOLF]: SkillNames.BITE,
+    [StageNames.HUNTER]: SkillNames.FIRE,
+    [StageNames.VOTE]: SkillNames.VOTE,
+    [StageNames.VOTE_YES_NO]: SkillNames.VOTE_HANG,
 };
 export const SKILL_REQUIRE_TARGETS = {
     [SkillNames.BITE]: 1,
@@ -31,3 +41,12 @@ export const SKILL_REQUIRE_TARGETS = {
     [SkillNames.SEE]: 1,
     [SkillNames.VOTE]: 1
 } as {[skill in SkillNames]: number};
+
+export const SKILL_TARGET_IS_DEAD_MAN0 = [
+    SkillNames.CURSE,
+    SkillNames.SAVE,
+    SkillNames.VOTE_SAVE,
+    SkillNames.VOTE_HANG
+];
+
+export const SKILLS_REQUIRE_LAST_TARGET_DIFFERENT = [SkillNames.PROTECT, SkillNames.FIRE];

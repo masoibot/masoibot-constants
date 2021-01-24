@@ -46,12 +46,10 @@ export function countRoleEvent(state: State, id: string, eventName: EventNames, 
 export function getCurrentTargets(state: State, uid: string, skill: SkillNames): string[] {
     if (isPlayerExist(state, uid)) {
         let actions = state.actions
-            .filter((a) => {
-                return a.name === skill && a.from === uid;
-            })
+            .filter((a) => a.name === skill && a.from === uid)
             .reverse();
         if (actions.length > 0) {
-            return actions[0].targets.toArray();
+            return actions[0].targets.toArray().filter((targetId: string) => isPlayerExist(state, targetId, true));
         }
     }
     return [];
@@ -61,33 +59,26 @@ export function getCurrentTargets(state: State, uid: string, skill: SkillNames):
  * Lấy ra targets gần đây nhất từ 1 Action của 1 nhân vật tại 1 ngày trong game.
  * Sử dụng cho xử lý điều kiện ở 1 số stage đặc biệt (VD: Stage sói cần check người bị cắn có được bảo vệ trước đó hay không)
  * @param state
- * @param uid
+ * @param userID
  * @param skill
  * @param dayNo
  */
-export function getLastTargets(state: State, uid: string, skill: SkillNames, dayNo?: number): string[] {
-    if (isPlayerExist(state, uid)) {
+export function getLastTargets(state: State, userID: string, skill: SkillNames, dayNo?: number): string[] {
+    if (isPlayerExist(state, userID)) {
         const events: Event[] = state.events
-            ?.filter((e) => {
-                // let data = mapSchema2Object<EventData>(e.data);
-                let dayNoCondition = dayNo == null || e.dayNo === dayNo;
-                return dayNoCondition && e.name === skill;
-            })
+            .filter((e) => e.name === skill && (dayNo == null || e.dayNo === dayNo))
             .reverse();
-        if (events && events.length > 0) {
-            // let data = mapSchema2Object<EventData>(events[0].data);
-            return setSchema2Array(events[0].targets);
-        }
+        if (events.length > 0) return events[0].targets.toArray().filter(uid => isPlayerExist(state, uid));
     }
     return [];
 }
 
-export function isPlayerExist(state: State, id: string | undefined, alive?: boolean, role?: Roles): boolean {
+export function isPlayerExist(state: State, id: string | undefined, aliveFilterOn: boolean = false, roleFilter?: Roles): boolean {
     if (id == null || state.users.get(id) == null) return false;
     const player = state.users.get(id);
     const roleId = state.roleAssignment.get(id);
-    const roleCondition = role == null || roleId === role;
-    const aliveCondition = alive == null || player.alive === alive;
+    const roleCondition = roleFilter == null || roleId === roleFilter;
+    const aliveCondition = !aliveFilterOn || player.alive;
     return roleCondition && aliveCondition;
 }
 

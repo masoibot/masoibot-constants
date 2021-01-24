@@ -12,7 +12,7 @@ export const ROLE_PARTY: {[party in PARTY]: Roles[]} = {
         Roles.OLD_MAN,
         Roles.WITCH,
         Roles.SEER,
-        Roles.SAVER,
+        Roles.SAVIOR,
         Roles.HUNTER,
         Roles.CUPID,
         Roles.LYCAN,

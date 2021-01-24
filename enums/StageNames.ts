@@ -3,7 +3,7 @@ export enum StageNames {
     START_GAME = "START_GAME",
     CUPID = "CUPID" /** @const CUPID gọi cupid dậy ghép đôi */,
     WILD_CHILD = "WILD_CHILD" /** @const WILD_CHILD gọi con hoang dậy nhận mẹ */,
-    SAVER = "SAVER" /** @const SAVER gọi bảo vệ dậy chọn người cần cứu */,
+    SAVIOR = "SAVIOR" /** @const SAVER gọi bảo vệ dậy chọn người cần cứu */,
     SEER = "SEER" /** @const SEER gọi tiên tri dậy */,
     HUNTER = "HUNTER" /**@const HUNTER gọi thợ săn dậy chọn người chết theo nếu bị sói cắn */,
     WOLF = "WOLF" /** @const WOLF gọi sói dậy cắn người */,

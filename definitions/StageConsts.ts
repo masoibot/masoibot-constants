@@ -22,7 +22,7 @@ export const NEXT_STAGE: {[stage in StageNames]: StageNames} = {
     START_GAME: StageNames.CUPID,
     CUPID: StageNames.WILD_CHILD,
     WILD_CHILD: StageNames.SEER,
-    SEER: StageNames.SAVER,
+    SEER: StageNames.SAVIOR,
     SAVER: StageNames.WOLF,
     WOLF: StageNames.WOLF_PLUS,
     WOLF_PLUS: StageNames.WITCH_SAVE,
