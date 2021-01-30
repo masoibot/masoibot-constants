@@ -38,6 +38,22 @@ export function countRoleEvent(state: State, id: string, eventName: EventNames, 
 }
 
 /**
+ * Đếm số lượng của event nhận được của 1 người chơi
+ * @param state
+ * @param userID
+ * @param eventName
+ * @param result
+ */
+export function countEvent(state: State, userID: string, eventName: EventNames, result?: EventResult): number {
+    if (!isPlayerExist(state, userID)) return 0; // || state.users.get(id).role == null
+    // let events = arraySchema2Array<Event>(state.users.get(id).role.roleEvents);
+    return state.events.filter((e) => {
+        // const data = mapSchema2Object<EventData>(e.data);
+        return e.to.includes(userID) && e.name === eventName && (result == null || e.result === result);
+    }).length;
+}
+
+/**
  * Lấy ra targets của action đầu tiên trong stage (dùng cho các state có 1 action như Witch, Hunter). note: các action được reset sau mỗi stage
  * @param state
  * @param uid

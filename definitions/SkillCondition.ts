@@ -1,24 +1,24 @@
 import {SkillNames, StageNames} from "../enums";
 
 export const SKILL_ALLOWED_IN_STAGE: {[stage in StageNames]: SkillNames[]} = {
-    END_GAME: [SkillNames.READY, SkillNames.SKIP],
-    WAITING_STAGE: [SkillNames.ADMIN_START_GAME],
-    START_GAME: [SkillNames.READY],
-    CUPID: [SkillNames.PAIRING, SkillNames.POINT],
-    WILD_CHILD: [SkillNames.CHOOSE_MOTHER, SkillNames.POINT],
-    SEER: [SkillNames.SEE, SkillNames.POINT],
-    SAVER: [SkillNames.PROTECT, SkillNames.POINT],
-    WOLF: [SkillNames.BITE, SkillNames.SKIP, SkillNames.POINT],
-    WOLF_PLUS: [SkillNames.CURSE, SkillNames.SKIP],
-    WITCH_SAVE: [SkillNames.SAVE, SkillNames.SKIP],
-    WITCH_KILL: [SkillNames.KILL, SkillNames.POINT, SkillNames.SKIP],
-    HUNTER: [SkillNames.FIRE, SkillNames.POINT],
-    COUPLE: [SkillNames.SKIP, SkillNames.POINT],
-    DISCUSS: [SkillNames.SKIP, SkillNames.POINT],
-    VOTE: [SkillNames.VOTE, SkillNames.SKIP, SkillNames.POINT],
-    LAST_WORD: [SkillNames.SKIP],
-    VOTE_YES_NO: [SkillNames.VOTE_SAVE, SkillNames.VOTE_HANG],
-    END_OF_DAY: [SkillNames.SKIP]
+    [StageNames.END_GAME]: [SkillNames.READY, SkillNames.SKIP],
+    [StageNames.WAITING_STAGE]: [SkillNames.ADMIN_START_GAME],
+    [StageNames.START_GAME]: [SkillNames.READY],
+    [StageNames.CUPID]: [SkillNames.PAIRING, SkillNames.POINT],
+    [StageNames.WILD_CHILD]: [SkillNames.CHOOSE_MOTHER, SkillNames.POINT],
+    [StageNames.SEER]: [SkillNames.SEE, SkillNames.POINT],
+    [StageNames.SAVIOR]: [SkillNames.PROTECT, SkillNames.POINT],
+    [StageNames.WOLF]: [SkillNames.BITE, SkillNames.SKIP, SkillNames.POINT],
+    [StageNames.WOLF_PLUS]: [SkillNames.CURSE, SkillNames.SKIP],
+    [StageNames.WITCH_SAVE]: [SkillNames.SAVE, SkillNames.SKIP],
+    [StageNames.WITCH_KILL]: [SkillNames.KILL, SkillNames.POINT, SkillNames.SKIP],
+    [StageNames.HUNTER]: [SkillNames.FIRE, SkillNames.POINT],
+    [StageNames.COUPLE]: [SkillNames.SKIP, SkillNames.POINT],
+    [StageNames.DISCUSS]: [SkillNames.SKIP, SkillNames.POINT],
+    [StageNames.VOTE]: [SkillNames.VOTE, SkillNames.SKIP, SkillNames.POINT],
+    [StageNames.LAST_WORD]: [SkillNames.SKIP],
+    [StageNames.VOTE_YES_NO]: [SkillNames.VOTE_SAVE, SkillNames.VOTE_HANG],
+    [StageNames.END_OF_DAY]: [SkillNames.SKIP]
 };
 export const STAGE_MANDATORY_SKILLS: {[stage in StageNames]?: SkillNames} = {
     [StageNames.CUPID]: SkillNames.PAIRING,
