@@ -89,6 +89,15 @@ export function getLastTargets(state: State, userID: string, skill: SkillNames, 
     return [];
 }
 
+export function getLastEvent(state: State, userID: string, skill: SkillNames, dayNo?: number): Event | null {
+    if (isPlayerExist(state, userID)) {
+        const events: Event[] = state.events
+            .filter((e) => e.from === userID && e.name === skill && (dayNo == null || e.dayNo === dayNo));
+        if (events.length > 0) return events[events.length - 1];
+    }
+    return null;
+}
+
 export function isPlayerExist(state: State, id: string | undefined, aliveFilterOn: boolean = false, roleFilter?: Roles): boolean {
     if (id == null || state.users.get(id) == null) return false;
     const player = state.users.get(id);
