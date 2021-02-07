@@ -1,7 +1,7 @@
 import {SkillNames, StageNames} from "../enums";
 
 export const SKILL_ALLOWED_IN_STAGE: { [stage in StageNames]: SkillNames[] } = {
-    [StageNames.END_GAME]: [SkillNames.READY, SkillNames.SKIP],
+    [StageNames.END_GAME]: [SkillNames.ADMIN_START_GAME, SkillNames.READY, SkillNames.SKIP],
     [StageNames.WAITING_STAGE]: [SkillNames.ADMIN_START_GAME],
     [StageNames.START_GAME]: [SkillNames.READY],
     [StageNames.CUPID]: [SkillNames.PAIRING, SkillNames.POINT],

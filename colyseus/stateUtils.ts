@@ -1,18 +1,22 @@
-import {EventNames, Roles, SkillNames} from "../enums";
+import {EventNames, Roles, SkillNames, StageNames} from "../enums";
 import {arraySchema2Array, setSchema2Array} from "./Utils";
 import {Action, Event, EventResult, SESSION, StagesInDay, State, User} from "./state";
 import {MapSchema, SetSchema} from "@colyseus/schema";
 
 /**
  * getActivePlayers return activePlayer in current stage (each state.stageName)
- * NOTE1: stages with full players don't need to be defined in state.listStages
+ * TODO: NOTE1: stages with full players don't need to be defined in state.listStages
  *      so by default activePlayer is state.playerIds
  * NOTE2: stages is defined in state,listStages but activePlayerIDs is null/undefined
  *      it must be in client-side state where activePlayerIDs is filtered to null/undefined
+ * NOTE3: WAITING_STAGE,END_GAME activePlayers is full spectatorIDs (state.spectatorIDs)
  * @param state
  */
 export function getActivePlayers(state: State) {
     const stage = state.listStages.get(state.stageName);
+    if ([StageNames.WAITING_STAGE, StageNames.END_GAME].includes(state.stageName)) {
+        return state.spectatorIDs;
+    }
     return stage != null ? stage.activePlayerIDs || new SetSchema<string>() : state.playerIDs;
 }
 
@@ -61,9 +65,7 @@ export function countEvent(state: State, userID: string, eventName: EventNames, 
  */
 export function getCurrentTargets(state: State, uid: string, skill: SkillNames): string[] {
     if (isPlayerExist(state, uid)) {
-        let actions = state.actions
-            .filter((a) => a.name === skill && a.from === uid)
-            .reverse();
+        let actions = state.actions.filter((a) => a.name === skill && a.from === uid).reverse();
         if (actions.length > 0) {
             return actions[0].targets.toArray().filter((targetId: string) => isPlayerExist(state, targetId, true));
         }
@@ -84,21 +86,27 @@ export function getLastTargets(state: State, userID: string, skill: SkillNames, 
         const events: Event[] = state.events
             .filter((e) => e.name === skill && (dayNo == null || e.dayNo === dayNo))
             .reverse();
-        if (events.length > 0) return events[0].targets.toArray().filter(uid => isPlayerExist(state, uid));
+        if (events.length > 0) return events[0].targets.toArray().filter((uid) => isPlayerExist(state, uid));
     }
     return [];
 }
 
 export function getLastEvent(state: State, userID: string, skill: SkillNames, dayNo?: number): Event | null {
     if (isPlayerExist(state, userID)) {
-        const events: Event[] = state.events
-            .filter((e) => e.from === userID && e.name === skill && (dayNo == null || e.dayNo === dayNo));
+        const events: Event[] = state.events.filter(
+            (e) => e.from === userID && e.name === skill && (dayNo == null || e.dayNo === dayNo)
+        );
         if (events.length > 0) return events[events.length - 1];
     }
     return null;
 }
 
-export function isPlayerExist(state: State, id: string | undefined, aliveFilterOn: boolean = false, roleFilter?: Roles): boolean {
+export function isPlayerExist(
+    state: State,
+    id: string | undefined,
+    aliveFilterOn: boolean = false,
+    roleFilter?: Roles
+): boolean {
     if (id == null || state.users.get(id) == null) return false;
     const player = state.users.get(id);
     const roleId = state.roleAssignment.get(id);
