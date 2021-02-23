@@ -9,11 +9,8 @@ export class Action extends Schema {
     constructor() {
         super();
     }
-    _assign(
-        name: SkillNames,
-        from: string | undefined,
-        targetIds: string[] = [],
-    ) {
+
+    _assign(name: SkillNames, from: string | undefined, targetIds: string[] = []) {
         const targets = new SetSchema<string>(targetIds);
         return (this as Action).assign({name, from, targets});
     }
@@ -49,6 +46,7 @@ export class Event extends Schema {
     constructor() {
         super();
     }
+
     _assign(
         name: EventNames,
         to: string[],

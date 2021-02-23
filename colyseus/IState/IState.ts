@@ -47,16 +47,3 @@ export function createIState(stageName: StageNames = StageNames.WAITING_STAGE): 
         deadMenIDs: new Set<string>()
     };
 }
-
-/**
- * getActivePlayers return activePlayer in current stage (each state.stageName)
- * NOTE1: stages with full players don't need to be defined in state.listStages
- *      so by default activePlayer is state.playerIds
- * NOTE2: stages is defined in state,listStages but activePlayerIDs is null/undefined
- *      it must be in IState-side state where activePlayerIDs is filtered to null/undefined
- * @param state
- */
-export function getIActivePlayerIds(state: IState) {
-    const stage = state.listStages.get(state.stageName);
-    return stage != null ? stage.activePlayerIDs || new Set<string>() : state.playerIDs;
-}

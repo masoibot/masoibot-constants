@@ -1,5 +1,5 @@
 import {EventNames, Roles, SkillNames, StageNames} from "../enums";
-import {arraySchema2Array, setSchema2Array} from "./Utils";
+import {setSchema2Array} from "./Utils";
 import {Action, Event, EventResult, SESSION, StagesInDay, State, User} from "./state";
 import {MapSchema, SetSchema} from "@colyseus/schema";
 

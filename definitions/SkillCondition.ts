@@ -1,6 +1,6 @@
 import {SkillNames, StageNames} from "../enums";
 
-export const SKILL_ALLOWED_IN_STAGE: { [stage in StageNames]: SkillNames[] } = {
+export const SKILL_ALLOWED_IN_STAGE: {[stage in StageNames]: SkillNames[]} = {
     [StageNames.END_GAME]: [SkillNames.ADMIN_START_GAME, SkillNames.READY, SkillNames.SKIP],
     [StageNames.WAITING_STAGE]: [SkillNames.ADMIN_START_GAME],
     [StageNames.START_GAME]: [SkillNames.READY],
@@ -37,7 +37,7 @@ export const MANDATORY_SKILLS: SkillNames[] = [
  * Skill of the stage, where the targets is extracted from
  * used by PrepareTargetCommands to determine 'skill' to retrieve targets
  */
-export const STAGE_TARGET_SKILLS: { [stage in StageNames]?: SkillNames } = {
+export const STAGE_TARGET_SKILLS: {[stage in StageNames]?: SkillNames} = {
     [StageNames.CUPID]: SkillNames.PAIRING,
     [StageNames.WILD_CHILD]: SkillNames.CHOOSE_MOTHER,
     [StageNames.SEER]: SkillNames.SEE,
@@ -60,7 +60,7 @@ export const SKILL_REQUIRE_TARGETS = {
     [SkillNames.PROTECT]: 1,
     [SkillNames.SEE]: 1,
     [SkillNames.VOTE]: 1
-} as { [skill in SkillNames]: number };
+} as {[skill in SkillNames]: number};
 
 export const SKILL_TARGET_IS_DEAD_MAN0 = [
     SkillNames.CURSE,

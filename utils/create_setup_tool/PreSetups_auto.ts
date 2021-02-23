@@ -71,11 +71,27 @@ export const PRE_SETUPS: {[numOfPlayer: number]: IPreSetup[]} = {
         },
         {
             balancePoint: 1,
-            setup: [Roles.VILLAGER, Roles.VILLAGER, Roles.LYCAN, Roles.SEER, Roles.SAVIOR, Roles.HUNTER, Roles.WOLF_PLUS]
+            setup: [
+                Roles.VILLAGER,
+                Roles.VILLAGER,
+                Roles.LYCAN,
+                Roles.SEER,
+                Roles.SAVIOR,
+                Roles.HUNTER,
+                Roles.WOLF_PLUS
+            ]
         },
         {
             balancePoint: 3,
-            setup: [Roles.VILLAGER, Roles.VILLAGER, Roles.ANGEL, Roles.SEER, Roles.SAVIOR, Roles.HUNTER, Roles.WOLF_PLUS]
+            setup: [
+                Roles.VILLAGER,
+                Roles.VILLAGER,
+                Roles.ANGEL,
+                Roles.SEER,
+                Roles.SAVIOR,
+                Roles.HUNTER,
+                Roles.WOLF_PLUS
+            ]
         },
         {
             balancePoint: 3,
@@ -103,7 +119,15 @@ export const PRE_SETUPS: {[numOfPlayer: number]: IPreSetup[]} = {
         },
         {
             balancePoint: 3,
-            setup: [Roles.VILLAGER, Roles.VILLAGER, Roles.SEER, Roles.SAVIOR, Roles.HUNTER, Roles.CURSED, Roles.WEREWOLF]
+            setup: [
+                Roles.VILLAGER,
+                Roles.VILLAGER,
+                Roles.SEER,
+                Roles.SAVIOR,
+                Roles.HUNTER,
+                Roles.CURSED,
+                Roles.WEREWOLF
+            ]
         },
         {
             balancePoint: 0,
